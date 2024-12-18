@@ -146,6 +146,43 @@
                         </div>
                     </li>
                 @endcan
+                
+
+                @can('color-list')
+                    <li class="side-nav-item">
+                        <a href="{{route('color')}}" class="side-nav-link">
+                            <i class="ri-palette-line"></i>
+                            <span> Color </span>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('product-category-list')
+                    <li class="side-nav-item">
+                        <a href="{{route('productCategory')}}" class="side-nav-link">
+                            <i class="ri-shopping-bag-line"></i>
+                            <span> Product Category </span>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('customer-list')
+                    <li class="side-nav-item">
+                        <a href="{{route('customer')}}" class="side-nav-link">
+                            <i class="ri-user-line"></i>
+                            <span> Customer </span>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('supplier-list')
+                    <li class="side-nav-item">
+                        <a href="{{route('supplier')}}" class="side-nav-link">
+                            <i class="ri-truck-line"></i>
+                            <span> Supplier </span>
+                        </a>
+                    </li>
+                @endcan
 
                 @can('site-setting')
                     <li class="side-nav-item">

@@ -5,6 +5,10 @@ use App\Http\Controllers\admin\AdminDashboardController;
 use App\Http\Controllers\admin\EmployeeController;
 use App\Http\Controllers\admin\EmployeeSectionController;
 use App\Http\Controllers\admin\SiteSettingController;
+use App\Http\Controllers\admin\ProductCategoryController;
+use App\Http\Controllers\admin\ColorController;
+use App\Http\Controllers\admin\SupplierController;
+use App\Http\Controllers\admin\CustomerController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +44,30 @@ Route::middleware('auth')->group(callback: function () {
     Route::post('/employee-store', [EmployeeController::class, 'store'])->name('employee.store');
     Route::put('/employee-update/{id}', [EmployeeController::class, 'update'])->name('employee.update');
     Route::get('/employee-delete/{id}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
+
+    //Customer Section
+    Route::get('/customer', [CustomerController::class, 'index'])->name('customer');
+    Route::post('/customer-store', [CustomerController::class, 'store'])->name('customer.store');
+    Route::put('/customer-update/{id}', [CustomerController::class, 'update'])->name('customer.update');
+    Route::get('/customer-delete/{id}', [CustomerController::class, 'destroy'])->name('customer.destroy');
+
+    //Supplier Section
+    Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier');
+    Route::post('/supplier-store', [SupplierController::class, 'store'])->name('supplier.store');
+    Route::put('/supplier-update/{id}', [SupplierController::class, 'update'])->name('supplier.update');
+    Route::get('/supplier-delete/{id}', [SupplierController::class, 'destroy'])->name('supplier.destroy');
+
+    //Color Section
+    Route::get('/color', [ColorController::class, 'index'])->name('color');
+    Route::post('/color-store', [ColorController::class, 'store'])->name('color.store');
+    Route::put('/color-update/{id}', [ColorController::class, 'update'])->name('color.update');
+    Route::get('/color-delete/{id}', [ColorController::class, 'destroy'])->name('color.destroy');
+
+    //Product Category Section
+    Route::get('/product-category', [ProductCategoryController::class, 'index'])->name('productCategory');
+    Route::post('/product-category-store', [ProductCategoryController::class, 'store'])->name('productCategory.store');
+    Route::put('/product-category-update/{id}', [ProductCategoryController::class, 'update'])->name('productCategory.update');
+    Route::get('/product-category-delete/{id}', [ProductCategoryController::class, 'destroy'])->name('productCategory.destroy');
 
 
 
