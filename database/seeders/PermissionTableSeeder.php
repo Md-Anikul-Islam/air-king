@@ -82,24 +82,26 @@ class PermissionTableSeeder extends Seeder
             'customer-section-edit',
             'customer-section-delete',
 
+            //Production Section
+            'production-manage',
             //For Block
             'block-section-list',
             'block-section-create',
             'block-section-edit',
             'block-section-delete',
-
             //For Unit
             'unit-section-list',
             'unit-section-create',
             'unit-section-edit',
             'unit-section-delete',
-
             //For Warehouse
             'wareHouse-section-list',
             'wareHouse-section-create',
             'wareHouse-section-edit',
             'wareHouse-section-delete',
 
+            //For Expense
+            'expense-manage',
             //For Expense Type
             'expenseType-section-list',
             'expenseType-section-create',

@@ -186,48 +186,64 @@
                     </li>
                 @endcan
 
+                @can('production-manage')
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarPages201" aria-expanded="false" aria-controls="sidebarPages201" class="side-nav-link">
+                            <i class="ri-rotate-lock-line"></i>
+                            <span>Production</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarPages201">
+                            <ul class="side-nav-second-level">
+                                @can('block-section-list')
+                                    <li>
+                                        <a href="{{route('block')}}">Block</a>
+                                    </li>
+                                @endcan
+
+                                @can('unit-section-list')
+                                    <li>
+                                        <a href="{{route('unit')}}">Unit</a>
+                                    </li>
+                                @endcan
+
+                                @can('wareHouse-section-list')
+                                    <li>
+                                        <a href="{{route('wareHouse')}}">Warehouse</a>
+                                    </li>
+                                @endcan
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
+
+
+                @can('expense-manage')
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarPages301" aria-expanded="false" aria-controls="sidebarPages301" class="side-nav-link">
+                            <i class="ri-rotate-lock-line"></i>
+                            <span>Expense</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarPages301">
+                            <ul class="side-nav-second-level">
+                                @can('expenseType-section-list')
+                                    <li>
+                                        <a href="{{route('expenseType')}}">Expense Type</a>
+                                    </li>
+                                @endcan
+
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
+
 
                 @can('customer-section-list')
                     <li class="side-nav-item">
                         <a href="{{route('customer')}}" class="side-nav-link">
                             <i class="ri-user-line"></i>
                             <span> Customer </span>
-                        </a>
-                    </li>
-                @endcan
-
-                @can('block-section-list')
-                    <li class="side-nav-item">
-                        <a href="{{route('block')}}" class="side-nav-link">
-                            <i class="ri-community-line"></i>
-                            <span> Block </span>
-                        </a>
-                    </li>
-                @endcan
-
-                @can('unit-section-list')
-                    <li class="side-nav-item">
-                        <a href="{{route('unit')}}" class="side-nav-link">
-                            <i class="ri-home-5-line"></i>
-                            <span> Unit </span>
-                        </a>
-                    </li>
-                @endcan
-
-                @can('wareHouse-section-list')
-                    <li class="side-nav-item">
-                        <a href="{{route('wareHouse')}}" class="side-nav-link">
-                            <i class="ri-government-line"></i>
-                            <span> Warehouse </span>
-                        </a>
-                    </li>
-                @endcan
-
-                @can('expenseType-section-list')
-                    <li class="side-nav-item">
-                        <a href="{{route('expenseType')}}" class="side-nav-link">
-                            <i class="ri-money-dollar-box-fill"></i>
-                            <span> Expense Type </span>
                         </a>
                     </li>
                 @endcan
