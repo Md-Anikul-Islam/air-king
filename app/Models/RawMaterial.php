@@ -15,6 +15,7 @@ class RawMaterial extends Model
         'raw_material_unit',
         'raw_material_code',
         'raw_material_price',
+        'raw_material_qty',
         'status',
     ];
 

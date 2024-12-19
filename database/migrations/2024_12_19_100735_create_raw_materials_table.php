@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('raw_material_unit');
             $table->string('raw_material_code');
             $table->decimal('raw_material_price', 8, 2);
+            $table->decimal('raw_material_qty', 8, 2);
             $table->tinyInteger('status')->default(1);
             $table->softDeletes();
             $table->timestamps();

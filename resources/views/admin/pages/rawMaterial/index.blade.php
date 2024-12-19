@@ -35,6 +35,7 @@
                         <th>Raw Material Unit</th>
                         <th>Raw Material Code</th>
                         <th>Raw Material Price</th>
+                        <th>Raw Material Qty</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -49,6 +50,7 @@
                             <td>{{$rawMaterialData->raw_material_unit}}</td>
                             <td>{{$rawMaterialData->raw_material_code}}</td>
                             <td>{{$rawMaterialData->raw_material_price}}</td>
+                            <td>{{$rawMaterialData->raw_material_qty}} {{$rawMaterialData->raw_material_unit}}</td>
                             <td class="{{ $rawMaterialData->status == 1 ? '' : 'text-danger' }}">
                                 {{ $rawMaterialData->status == 1 ? 'Active' : 'Inactive' }}
                             </td>
@@ -138,6 +140,14 @@
                                                             <label for="raw_material_price" class="form-label ">Raw Material Price</label>
                                                             <input type="text" id="raw_material_price" name="raw_material_price"
                                                                    class="form-control" value="{{$rawMaterialData->raw_material_price}}" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <div class="mb-3">
+                                                            <label for="raw_material_qty" class="form-label ">Raw Material Qty</label>
+                                                            <input type="text" id="raw_material_qty" name="raw_material_qty"
+                                                                   class="form-control" value="{{$rawMaterialData->raw_material_qty}}" required>
                                                         </div>
                                                     </div>
 
@@ -263,6 +273,15 @@
                                            class="form-control" required>
                                 </div>
                             </div>
+
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label for="raw_material_qty" class="form-label ">Raw Material Qty</label>
+                                    <input type="text" id="raw_material_qty" name="raw_material_qty"
+                                           class="form-control" required>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="d-flex justify-content-end">
                             <button class="btn btn-primary" type="submit">Submit</button>

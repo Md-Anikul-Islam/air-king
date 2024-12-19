@@ -48,6 +48,7 @@ class RawMaterialController extends Controller
             $rawMaterial->raw_material_code = $request->raw_material_code;
             $rawMaterial->raw_material_unit = $request->raw_material_unit;
             $rawMaterial->raw_material_price = $request->raw_material_price;
+            $rawMaterial->raw_material_qty = $request->raw_material_qty;
             $rawMaterial->save();
             Toastr::success('Raw Material Section Added Successfully', 'Success');
             return redirect()->back();
@@ -74,6 +75,7 @@ class RawMaterialController extends Controller
             $rawMaterial->raw_material_code = $request->raw_material_code;
             $rawMaterial->raw_material_unit = $request->raw_material_unit;
             $rawMaterial->raw_material_price = $request->raw_material_price;
+            $rawMaterial->raw_material_qty = $request->raw_material_qty;
             $rawMaterial->status = $request->status;
             $rawMaterial->save();
             Toastr::success('Raw Material Section Updated Successfully', 'Success');
