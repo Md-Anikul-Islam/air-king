@@ -30,8 +30,8 @@
                     <thead>
                     <tr>
                         <th>S/N</th>
-                        <th>Name</th>
                         <th>Block</th>
+                        <th>Name</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -40,8 +40,8 @@
                     @foreach($units as $key=>$data)
                         <tr>
                             <td>{{$key+1}}</td>
-                            <td>{{$data->name}}</td>
                             <td>{{ $data->block->name }}</td>
+                            <td>{{$data->name}}</td>
                             <td class="{{ $data->status == 1 ? '' : 'text-danger' }}">
                                 {{ $data->status == 1 ? 'Active' : 'Inactive' }}
                             </td>
@@ -77,15 +77,6 @@
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="mb-3">
-                                                            <label for="name" class="form-label">Name</label>
-                                                            <input type="text" id="name" name="name"
-                                                                   value="{{$data->name}}"
-                                                                   class="form-control" placeholder="Enter Unit Name"
-                                                                   required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="mb-3">
                                                         <label for="block_id" class="form-label">Block </label>
                                                         <select name="block_id" id="block_id"
                                                                 class="form-control">
@@ -98,6 +89,15 @@
                                                                 @endforeach
                                                             @endif
                                                         </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="mb-3">
+                                                            <label for="name" class="form-label">Name</label>
+                                                            <input type="text" id="name" name="name"
+                                                                   value="{{$data->name}}"
+                                                                   class="form-control" placeholder="Enter Unit Name"
+                                                                   required>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
@@ -170,13 +170,6 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">Name</label>
-                                    <input type="text" id="name" name="name"
-                                           class="form-control" placeholder="Enter Unit Name" required>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="mb-3">
                                     <label for="block_id" class="form-label"> Block
                                     </label>
                                     <select name="block_id" id="block_id" class="form-control">
@@ -192,18 +185,9 @@
                             </div>
                             <div class="col-12">
                                 <div class="mb-3">
-                                    <label for="example-select"
-                                           class="form-label">Status</label>
-                                    <select name="status" class="form-select" required>
-                                        <option
-                                            value="1">
-                                            Active
-                                        </option>
-                                        <option
-                                            value="0">
-                                            Inactive
-                                        </option>
-                                    </select>
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" id="name" name="name"
+                                           class="form-control" placeholder="Enter Unit Name" required>
                                 </div>
                             </div>
                         </div>

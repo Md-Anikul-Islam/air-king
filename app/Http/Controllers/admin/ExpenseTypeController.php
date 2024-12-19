@@ -66,7 +66,7 @@ class ExpenseTypeController extends Controller
         try {
             $expenseType = ExpenseType::find($id);
             $expenseType->delete();
-            Toastr::success('Expense Type Section Deleted Successfully', 'Success');
+            Toastr::success('ExpenseType Section Deleted Successfully', 'Success');
             return redirect()->back();
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
