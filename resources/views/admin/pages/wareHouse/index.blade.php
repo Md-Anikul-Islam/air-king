@@ -198,13 +198,7 @@
                     <form method="post" action="{{route('wareHouse.store')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-12">
-                                <div class="mb-3">
-                                    <label for="name" class="form-label">Name</label>
-                                    <input type="text" id="name" name="name"
-                                           class="form-control" placeholder="Enter Warehouse Name" required>
-                                </div>
-                            </div>
+
                             <div class="col-12">
                                 <div class="mb-3">
                                     <label for="block_id_add" class="form-label">Block</label>
@@ -226,6 +220,13 @@
                                     <select name="unit_id" id="unit_id_add" class="form-control" required>
                                         <option value="">Select One</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" id="name" name="name"
+                                           class="form-control" placeholder="Enter Warehouse Name" required>
                                 </div>
                             </div>
                             <div class="col-12">
