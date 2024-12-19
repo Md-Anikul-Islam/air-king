@@ -4,6 +4,8 @@
 use App\Http\Controllers\admin\AdminDashboardController;
 use App\Http\Controllers\admin\EmployeeController;
 use App\Http\Controllers\admin\EmployeeSectionController;
+use App\Http\Controllers\admin\RawMaterialController;
+use App\Http\Controllers\admin\RawMaterialSectionController;
 use App\Http\Controllers\admin\SiteSettingController;
 use App\Http\Controllers\admin\ProductCategoryController;
 use App\Http\Controllers\admin\ColorController;
@@ -69,7 +71,17 @@ Route::middleware('auth')->group(callback: function () {
     Route::put('/product-category-update/{id}', [ProductCategoryController::class, 'update'])->name('productCategory.update');
     Route::get('/product-category-delete/{id}', [ProductCategoryController::class, 'destroy'])->name('productCategory.destroy');
 
+    //Raw Material Section
+    Route::get('/raw-material-section', [RawMaterialSectionController::class, 'index'])->name('rawMaterialSection');
+    Route::post('/raw-material-section-store', [RawMaterialSectionController::class, 'store'])->name('raw.material.section.store');
+    Route::put('/raw-material-section-update/{id}', [RawMaterialSectionController::class, 'update'])->name('raw.material.section.update');
+    Route::get('/raw-material-section-delete/{id}', [RawMaterialSectionController::class, 'destroy'])->name('raw.material.section.destroy');
 
+    //Raw Material Section
+    Route::get('/raw-material', [RawMaterialController::class, 'index'])->name('rawMaterial');
+    Route::post('/raw-material-store', [RawMaterialController::class, 'store'])->name('raw.material.store');
+    Route::put('/raw-material-update/{id}', [RawMaterialController::class, 'update'])->name('raw.material.update');
+    Route::get('/raw-material-delete/{id}', [RawMaterialController::class, 'destroy'])->name('raw.material.destroy');
 
     //Role and User Section
     Route::resource('roles', RoleController::class);

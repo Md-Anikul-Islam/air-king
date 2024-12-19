@@ -162,6 +162,18 @@
                                         <a href="{{route('supplier')}}">Supplier</a>
                                     </li>
                                 @endcan
+
+                                @can('raw-material-section-list')
+                                    <li>
+                                        <a href="{{route('rawMaterialSection')}}">Raw Material Section</a>
+                                    </li>
+                                @endcan
+
+                                @can('raw-material-list')
+                                    <li>
+                                        <a href="{{route('rawMaterial')}}">Raw Material</a>
+                                    </li>
+                                @endcan
                             </ul>
                         </div>
                     </li>

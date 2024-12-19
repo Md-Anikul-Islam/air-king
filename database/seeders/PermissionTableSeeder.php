@@ -43,6 +43,18 @@ class PermissionTableSeeder extends Seeder
             'supplier-section-edit',
             'supplier-section-delete',
 
+            //For Raw Material section
+            'raw-material-section-list',
+            'raw-material-section-create',
+            'raw-material-section-edit',
+            'raw-material-section-delete',
+
+            //For Raw Material
+            'raw-material-list',
+            'raw-material-create',
+            'raw-material-edit',
+            'raw-material-delete',
+
 
 
             //Employee Section of hr management
