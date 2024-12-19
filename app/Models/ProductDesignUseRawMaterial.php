@@ -14,4 +14,11 @@ class ProductDesignUseRawMaterial extends Model
         'quantity',
         'status',
     ];
+
+    public function rawMaterial()
+    {
+        return $this->belongsTo(RawMaterial::class);
+    }
+
+
 }

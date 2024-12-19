@@ -15,4 +15,21 @@ class ProductDesign extends Model
         'product_version',
         'status',
     ];
+
+    public function productCategory()
+    {
+        return $this->belongsTo(ProductCategory::class);
+    }
+
+    public function productColor()
+    {
+        return $this->belongsTo(Color::class, 'product_color_id');
+    }
+
+    // ProductDesign model
+    public function rawMaterials()
+    {
+        return $this->hasMany(ProductDesignUseRawMaterial::class);
+    }
+
 }

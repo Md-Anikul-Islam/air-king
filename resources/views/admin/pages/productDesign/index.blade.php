@@ -55,7 +55,7 @@
                             </td>
                             <!--Edit Modal -->
                             <div class="modal fade" id="editNewModalId{{$productDesignData->id}}" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="editNewModalLabel{{$productDesignData->id}}" aria-hidden="true">
-                                <div class="modal-dialog  modal-dialog-centered">
+                                <div class="modal-dialog modal-lg  modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4 class="modal-title" id="addNewModalLabel{{$productDesignData->id}}">Edit</h4>
@@ -66,15 +66,47 @@
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="row">
-                                                    <div class="col-12">
+                                                    <div class="col-6">
                                                         <div class="mb-3">
-                                                            <label for="product_name" class="form-label">Name</label>
-                                                            <input type="text" id="product_name" name="product_name" value="{{$productDesignData->product_name}}"
-                                                                   class="form-control" placeholder="Enter Color Name" required>
+                                                            <label for="example-select" class="form-label">Product Category</label>
+                                                            <select name="product_category_id" class="form-select">
+                                                                <option value="" selected>Product Category Select</option>
+                                                                @foreach($productCategory as $productCategoryData)
+                                                                    <option value="{{$productCategoryData->id}}" {{ $productDesignData->product_category_id == $productCategoryData->id ? 'selected' : '' }}>{{$productCategoryData->name}}</option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-12">
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label for="product_name" class="form-label">Name</label>
+                                                            <input type="text" id="product_name" name="product_name"
+                                                                   class="form-control" placeholder="Enter Name" value="{{$productDesignData->product_name}}" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label for="example-select" class="form-label">Product Color</label>
+                                                            <select name="product_color_id" class="form-select">
+                                                                <option value="" selected>Product Color Select</option>
+                                                                @foreach($color as $colorData)
+                                                                    <option value="{{$colorData->id}}" {{ $productDesignData->product_color_id == $colorData->id ? 'selected' : '' }}>{{$colorData->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label for="product_version" class="form-label">Version</label>
+                                                            <input type="text" id="product_version" name="product_version"
+                                                                   class="form-control" placeholder="Enter Version" value="{{$productDesignData->product_version}}" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-6">
                                                         <div class="mb-3">
                                                             <label for="example-select" class="form-label">Status</label>
                                                             <select name="status" class="form-select">
