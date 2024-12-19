@@ -23,6 +23,8 @@ class PermissionTableSeeder extends Seeder
             'user-edit',
             'user-delete',
 
+            //Product Design
+            'product-design-manage',
             //For Product Category
             'product-category-section-list',
             'product-category-section-create',
@@ -34,12 +36,6 @@ class PermissionTableSeeder extends Seeder
             'color-section-create',
             'color-section-edit',
             'color-section-delete',
-
-            //For Customer
-            'customer-section-list',
-            'customer-section-create',
-            'customer-section-edit',
-            'customer-section-delete',
 
             //For Supplier
             'supplier-section-list',
@@ -61,6 +57,12 @@ class PermissionTableSeeder extends Seeder
             'employee-create',
             'employee-edit',
             'employee-delete',
+
+            //For Customer
+            'customer-section-list',
+            'customer-section-create',
+            'customer-section-edit',
+            'customer-section-delete',
 
 
 

@@ -136,23 +136,37 @@
                 @endcan
 
 
-                @can('color-section-list')
+                @can('product-design-manage')
                     <li class="side-nav-item">
-                        <a href="{{route('color')}}" class="side-nav-link">
-                            <i class="ri-palette-line"></i>
-                            <span> Color </span>
+                        <a data-bs-toggle="collapse" href="#sidebarPages102" aria-expanded="false" aria-controls="sidebarPages102" class="side-nav-link">
+                            <i class="ri-pencil-ruler-2-line"></i>
+                            <span>Product Design</span>
+                            <span class="menu-arrow"></span>
                         </a>
+                        <div class="collapse" id="sidebarPages102">
+                            <ul class="side-nav-second-level">
+                                @can('color-section-list')
+                                    <li>
+                                        <a href="{{route('color')}}">Color</a>
+                                    </li>
+                                @endcan
+
+                                @can('product-category-section-list')
+                                    <li>
+                                        <a href="{{route('productCategory')}}">Product Category</a>
+                                    </li>
+                                @endcan
+
+                                @can('supplier-section-list')
+                                    <li>
+                                        <a href="{{route('supplier')}}">Supplier</a>
+                                    </li>
+                                @endcan
+                            </ul>
+                        </div>
                     </li>
                 @endcan
 
-                @can('product-category-section-list')
-                    <li class="side-nav-item">
-                        <a href="{{route('productCategory')}}" class="side-nav-link">
-                            <i class="ri-shopping-bag-line"></i>
-                            <span> Product Category </span>
-                        </a>
-                    </li>
-                @endcan
 
                 @can('customer-section-list')
                     <li class="side-nav-item">
@@ -163,14 +177,6 @@
                     </li>
                 @endcan
 
-                @can('supplier-section-list')
-                    <li class="side-nav-item">
-                        <a href="{{route('supplier')}}" class="side-nav-link">
-                            <i class="ri-truck-line"></i>
-                            <span> Supplier </span>
-                        </a>
-                    </li>
-                @endcan
 
                 @can('site-setting')
                     <li class="side-nav-item">
