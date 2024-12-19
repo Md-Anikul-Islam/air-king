@@ -189,7 +189,7 @@
                 @can('production-manage')
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages201" aria-expanded="false" aria-controls="sidebarPages201" class="side-nav-link">
-                            <i class="ri-rotate-lock-line"></i>
+                            <i class="ri-tools-line"></i>
                             <span>Production</span>
                             <span class="menu-arrow"></span>
                         </a>
@@ -221,7 +221,7 @@
                 @can('expense-manage')
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages301" aria-expanded="false" aria-controls="sidebarPages301" class="side-nav-link">
-                            <i class="ri-rotate-lock-line"></i>
+                            <i class="ri-money-dollar-circle-line"></i>
                             <span>Expense</span>
                             <span class="menu-arrow"></span>
                         </a>
