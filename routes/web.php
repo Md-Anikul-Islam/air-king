@@ -11,6 +11,7 @@ use App\Http\Controllers\admin\ProductCategoryController;
 use App\Http\Controllers\admin\ColorController;
 use App\Http\Controllers\admin\SupplierController;
 use App\Http\Controllers\admin\CustomerController;
+use App\Http\Controllers\admin\BlockController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -82,6 +83,12 @@ Route::middleware('auth')->group(callback: function () {
     Route::post('/raw-material-store', [RawMaterialController::class, 'store'])->name('raw.material.store');
     Route::put('/raw-material-update/{id}', [RawMaterialController::class, 'update'])->name('raw.material.update');
     Route::get('/raw-material-delete/{id}', [RawMaterialController::class, 'destroy'])->name('raw.material.destroy');
+
+    //Block
+    Route::get('/block', [BlockController::class, 'index'])->name('block');
+    Route::post('/block-store', [BlockController::class, 'store'])->name('block.store');
+    Route::put('/block-update/{id}', [BlockController::class, 'update'])->name('block.update');
+    Route::get('/block-delete/{id}', [BlockController::class, 'destroy'])->name('block.destroy');
 
     //Role and User Section
     Route::resource('roles', RoleController::class);

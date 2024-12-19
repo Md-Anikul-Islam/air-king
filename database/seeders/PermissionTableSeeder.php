@@ -76,6 +76,11 @@ class PermissionTableSeeder extends Seeder
             'customer-section-edit',
             'customer-section-delete',
 
+            //For Block
+            'block-section-list',
+            'block-section-create',
+            'block-section-edit',
+            'block-section-delete',
 
 
             //For Role and permission

@@ -189,6 +189,15 @@
                     </li>
                 @endcan
 
+                @can('block-section-list')
+                    <li class="side-nav-item">
+                        <a href="{{route('block')}}" class="side-nav-link">
+                            <i class="ri-community-line"></i>
+                            <span> Block </span>
+                        </a>
+                    </li>
+                @endcan
+
 
                 @can('site-setting')
                     <li class="side-nav-item">
