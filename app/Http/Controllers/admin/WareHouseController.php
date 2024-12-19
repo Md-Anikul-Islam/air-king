@@ -79,6 +79,12 @@ class WareHouseController extends Controller
         }
     }
 
+    public function getUnits($block_id)
+    {
+        $units = Unit::where('block_id', $block_id)->where('status', 1)->get();
+        return response()->json($units);
+    }
+
     public function destroy($id)
     {
         try {

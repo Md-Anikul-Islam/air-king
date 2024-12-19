@@ -30,9 +30,9 @@
                     <thead>
                     <tr>
                         <th>S/N</th>
-                        <th>Name</th>
                         <th>Block</th>
                         <th>Unit</th>
+                        <th>Name</th>
                         <th>Cost</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -42,9 +42,9 @@
                     @foreach($wareHouses as $key=>$data)
                         <tr>
                             <td>{{$key+1}}</td>
-                            <td>{{$data->name}}</td>
                             <td>{{ $data->block->name }}</td>
                             <td>{{ $data->unit->name }}</td>
+                            <td>{{$data->name}}</td>
                             <td>{{$data->cost}}</td>
                             <td class="{{ $data->status == 1 ? '' : 'text-danger' }}">
                                 {{ $data->status == 1 ? 'Active' : 'Inactive' }}
@@ -81,17 +81,8 @@
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="mb-3">
-                                                            <label for="name" class="form-label">Name</label>
-                                                            <input type="text" id="name" name="name"
-                                                                   value="{{$data->name}}"
-                                                                   class="form-control" placeholder="Enter Warehouse Name"
-                                                                   required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="mb-3">
-                                                            <label for="block_id" class="form-label">Block </label>
-                                                            <select name="block_id" id="block_id"
+                                                            <label for="block_id_edit_{{$data->id}}" class="form-label">Block </label>
+                                                            <select name="block_id" id="block_id_edit_{{$data->id}}"
                                                                     class="form-control" required>
                                                                 @if (!empty($blocks))
                                                                     @foreach ($blocks as $block)
@@ -106,8 +97,8 @@
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="mb-3">
-                                                            <label for="unit_id" class="form-label">Block </label>
-                                                            <select name="unit_id" id="unit_id"
+                                                            <label for="unit_id_edit_{{$data->id}}" class="form-label">Unit </label>
+                                                            <select name="unit_id" id="unit_id_edit_{{$data->id}}"
                                                                     class="form-control" required>
                                                                 @if (!empty($units))
                                                                     @foreach ($units as $unit)
@@ -118,6 +109,16 @@
                                                                     @endforeach
                                                                 @endif
                                                             </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="mb-3">
+                                                            <label for="name" class="form-label">Name</label>
+                                                            <input type="text" id="name" name="name"
+                                                                   value="{{$data->name}}"
+                                                                   class="form-control"
+                                                                   placeholder="Enter Warehouse Name"
+                                                                   required>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
@@ -206,14 +207,14 @@
                             </div>
                             <div class="col-12">
                                 <div class="mb-3">
-                                    <label for="block_id" class="form-label"> Block
-                                    </label>
-                                    <select name="block_id" id="block_id" class="form-control" required>
+                                    <label for="block_id_add" class="form-label">Block</label>
+                                    <select name="block_id" id="block_id_add" class="form-control" required>
                                         <option value="">Select One</option>
                                         @if (!empty($active_blocks))
                                             @foreach ($active_blocks as $active_block)
                                                 <option value="{{ $active_block->id }}">
-                                                    {{ $active_block->name ?? '' }}</option>
+                                                    {{ $active_block->name ?? '' }}
+                                                </option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -221,16 +222,9 @@
                             </div>
                             <div class="col-12">
                                 <div class="mb-3">
-                                    <label for="unit_id" class="form-label"> Block
-                                    </label>
-                                    <select name="unit_id" id="unit_id" class="form-control" required>
+                                    <label for="unit_id_add" class="form-label">Unit</label>
+                                    <select name="unit_id" id="unit_id_add" class="form-control" required>
                                         <option value="">Select One</option>
-                                        @if (!empty($active_units))
-                                            @foreach ($active_units as $active_unit)
-                                                <option value="{{ $active_unit->id }}">
-                                                    {{ $active_unit->name ?? '' }}</option>
-                                            @endforeach
-                                        @endif
                                     </select>
                                 </div>
                             </div>
@@ -239,22 +233,6 @@
                                     <label for="cost" class="form-label">Cost</label>
                                     <input type="number" id="cost" name="cost"
                                            class="form-control" placeholder="Enter Cost" required>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="mb-3">
-                                    <label for="example-select"
-                                           class="form-label">Status</label>
-                                    <select name="status" class="form-select" required>
-                                        <option
-                                            value="1">
-                                            Active
-                                        </option>
-                                        <option
-                                            value="0">
-                                            Inactive
-                                        </option>
-                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -266,4 +244,34 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function updateUnits(blockId, unitSelectId) {
+            var unitSelect = document.getElementById(unitSelectId);
+            unitSelect.innerHTML = '<option value="">Select One</option>';
+
+            if (blockId) {
+                fetch(`/get-units/${blockId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach(unit => {
+                            var option = document.createElement('option');
+                            option.value = unit.id;
+                            option.textContent = unit.name;
+                            unitSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching units:', error));
+            }
+        }
+        document.getElementById('block_id_add').addEventListener('change', function () {
+            updateUnits(this.value, 'unit_id_add');
+        });
+
+        @foreach($wareHouses as $data)
+        document.getElementById('block_id_edit_{{$data->id}}').addEventListener('change', function () {
+            updateUnits(this.value, 'unit_id_edit_{{$data->id}}');
+        });
+        @endforeach
+    </script>
 @endsection

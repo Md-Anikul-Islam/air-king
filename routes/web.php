@@ -111,6 +111,7 @@ Route::middleware('auth')->group(callback: function () {
     Route::post('/wareHouse-store', [WareHouseController::class, 'store'])->name('wareHouse.store');
     Route::put('/wareHouse-update/{id}', [WareHouseController::class, 'update'])->name('wareHouse.update');
     Route::get('/wareHouse-delete/{id}', [WareHouseController::class, 'destroy'])->name('wareHouse.destroy');
+    Route::get('/get-units/{block_id}', [WareHouseController::class, 'getUnits'])->name('get.units');
 
     //Expense Types
     Route::get('/expenseType', [ExpenseTypeController::class, 'index'])->name('expenseType');
