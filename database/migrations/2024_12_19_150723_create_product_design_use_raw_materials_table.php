@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('product_design_use_raw_materials', function (Blueprint $table) {
             $table->id();
+            $table->integer('product_design_id');
+            $table->integer('raw_material_id');
+            $table->integer('quantity');
+            $table->tinyInteger('status')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

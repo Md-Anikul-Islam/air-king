@@ -55,6 +55,12 @@ class PermissionTableSeeder extends Seeder
             'raw-material-edit',
             'raw-material-delete',
 
+            //Product Design
+            'product-design-list',
+            'product-design-create',
+            'product-design-edit',
+            'product-design-delete',
+
 
 
             //Employee Section of hr management

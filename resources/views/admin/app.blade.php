@@ -174,6 +174,13 @@
                                         <a href="{{route('rawMaterial')}}">Raw Material</a>
                                     </li>
                                 @endcan
+
+                                @can('product-design-list')
+                                    <li>
+                                        <a href="{{route('product.design')}}">Product Design</a>
+                                    </li>
+                                @endcan
+
                             </ul>
                         </div>
                     </li>

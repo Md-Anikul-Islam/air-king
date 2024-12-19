@@ -4,6 +4,7 @@
 use App\Http\Controllers\admin\AdminDashboardController;
 use App\Http\Controllers\admin\EmployeeController;
 use App\Http\Controllers\admin\EmployeeSectionController;
+use App\Http\Controllers\admin\ProductDesignController;
 use App\Http\Controllers\admin\RawMaterialController;
 use App\Http\Controllers\admin\RawMaterialSectionController;
 use App\Http\Controllers\admin\SiteSettingController;
@@ -82,6 +83,12 @@ Route::middleware('auth')->group(callback: function () {
     Route::post('/raw-material-store', [RawMaterialController::class, 'store'])->name('raw.material.store');
     Route::put('/raw-material-update/{id}', [RawMaterialController::class, 'update'])->name('raw.material.update');
     Route::get('/raw-material-delete/{id}', [RawMaterialController::class, 'destroy'])->name('raw.material.destroy');
+
+    //Product Design
+    Route::get('/product-design', [ProductDesignController::class, 'index'])->name('product.design');
+    Route::post('/product-design-store', [ProductDesignController::class, 'store'])->name('product.design.store');
+    Route::put('/product-design-update/{id}', [ProductDesignController::class, 'update'])->name('product.design.update');
+    Route::get('/product-design-delete/{id}', [ProductDesignController::class, 'destroy'])->name('product.design.destroy');
 
     //Role and User Section
     Route::resource('roles', RoleController::class);

@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('product_designs', function (Blueprint $table) {
             $table->id();
+            $table->integer('product_category_id');
+            $table->string('product_name');
+            $table->integer('product_color_id');
+            $table->string('product_version');
+            $table->tinyInteger('status')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
