@@ -207,6 +207,24 @@
                     </li>
                 @endcan
 
+                @can('wareHouse-section-list')
+                    <li class="side-nav-item">
+                        <a href="{{route('wareHouse')}}" class="side-nav-link">
+                            <i class="ri-government-line"></i>
+                            <span> Warehouse </span>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('expenseType-section-list')
+                    <li class="side-nav-item">
+                        <a href="{{route('expenseType')}}" class="side-nav-link">
+                            <i class="ri-money-dollar-box-fill"></i>
+                            <span> Expense Type </span>
+                        </a>
+                    </li>
+                @endcan
+
 
                 @can('site-setting')
                     <li class="side-nav-item">

@@ -88,6 +88,18 @@ class PermissionTableSeeder extends Seeder
             'unit-section-edit',
             'unit-section-delete',
 
+            //For Warehouse
+            'wareHouse-section-list',
+            'wareHouse-section-create',
+            'wareHouse-section-edit',
+            'wareHouse-section-delete',
+
+            //For Expense Type
+            'expenseType-section-list',
+            'expenseType-section-create',
+            'expenseType-section-edit',
+            'expenseType-section-delete',
+
 
             //For Role and permission
             'role-and-permission-list',

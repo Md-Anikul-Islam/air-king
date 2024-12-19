@@ -26,7 +26,7 @@ class UnitController extends Controller
         $units = Unit::latest()->get();
         $blocks = Block::latest()->get();
         $active_blocks = Block::where('status', 1)->latest()->get();
-        $page_title = 'Units';
+        $page_title = 'Unit';
         return view('admin.pages.unit.index', compact('blocks','active_blocks', 'units', 'page_title'));
     }
 
