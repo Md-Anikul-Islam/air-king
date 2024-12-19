@@ -196,6 +196,42 @@
                     </li>
                 @endcan
 
+                @can('block-section-list')
+                    <li class="side-nav-item">
+                        <a href="{{route('block')}}" class="side-nav-link">
+                            <i class="ri-community-line"></i>
+                            <span> Block </span>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('unit-section-list')
+                    <li class="side-nav-item">
+                        <a href="{{route('unit')}}" class="side-nav-link">
+                            <i class="ri-home-5-line"></i>
+                            <span> Unit </span>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('wareHouse-section-list')
+                    <li class="side-nav-item">
+                        <a href="{{route('wareHouse')}}" class="side-nav-link">
+                            <i class="ri-government-line"></i>
+                            <span> Warehouse </span>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('expenseType-section-list')
+                    <li class="side-nav-item">
+                        <a href="{{route('expenseType')}}" class="side-nav-link">
+                            <i class="ri-money-dollar-box-fill"></i>
+                            <span> Expense Type </span>
+                        </a>
+                    </li>
+                @endcan
+
 
                 @can('site-setting')
                     <li class="side-nav-item">

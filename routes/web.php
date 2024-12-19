@@ -12,6 +12,10 @@ use App\Http\Controllers\admin\ProductCategoryController;
 use App\Http\Controllers\admin\ColorController;
 use App\Http\Controllers\admin\SupplierController;
 use App\Http\Controllers\admin\CustomerController;
+use App\Http\Controllers\admin\BlockController;
+use App\Http\Controllers\admin\UnitController;
+use App\Http\Controllers\admin\WareHouseController;
+use App\Http\Controllers\admin\ExpenseTypeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -89,6 +93,30 @@ Route::middleware('auth')->group(callback: function () {
     Route::post('/product-design-store', [ProductDesignController::class, 'store'])->name('product.design.store');
     Route::put('/product-design-update/{id}', [ProductDesignController::class, 'update'])->name('product.design.update');
     Route::get('/product-design-delete/{id}', [ProductDesignController::class, 'destroy'])->name('product.design.destroy');
+
+    //Block
+    Route::get('/block', [BlockController::class, 'index'])->name('block');
+    Route::post('/block-store', [BlockController::class, 'store'])->name('block.store');
+    Route::put('/block-update/{id}', [BlockController::class, 'update'])->name('block.update');
+    Route::get('/block-delete/{id}', [BlockController::class, 'destroy'])->name('block.destroy');
+
+    //Unit
+    Route::get('/unit', [UnitController::class, 'index'])->name('unit');
+    Route::post('/unit-store', [UnitController::class, 'store'])->name('unit.store');
+    Route::put('/unit-update/{id}', [UnitController::class, 'update'])->name('unit.update');
+    Route::get('/unit-delete/{id}', [UnitController::class, 'destroy'])->name('unit.destroy');
+
+    //Warehouse
+    Route::get('/wareHouse', [WareHouseController::class, 'index'])->name('wareHouse');
+    Route::post('/wareHouse-store', [WareHouseController::class, 'store'])->name('wareHouse.store');
+    Route::put('/wareHouse-update/{id}', [WareHouseController::class, 'update'])->name('wareHouse.update');
+    Route::get('/wareHouse-delete/{id}', [WareHouseController::class, 'destroy'])->name('wareHouse.destroy');
+
+    //Expense Types
+    Route::get('/expenseType', [ExpenseTypeController::class, 'index'])->name('expenseType');
+    Route::post('/expenseType-store', [ExpenseTypeController::class, 'store'])->name('expenseType.store');
+    Route::put('/expenseType-update/{id}', [ExpenseTypeController::class, 'update'])->name('expenseType.update');
+    Route::get('/expenseType-delete/{id}', [ExpenseTypeController::class, 'destroy'])->name('expenseType.destroy');
 
     //Role and User Section
     Route::resource('roles', RoleController::class);

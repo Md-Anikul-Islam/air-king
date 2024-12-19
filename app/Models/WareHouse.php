@@ -16,4 +16,14 @@ class WareHouse extends Model
         'cost',
         'status',
     ];
+
+    public function block()
+    {
+        return $this->hasOne(Block::class, 'id', 'block_id');
+    }
+
+    public function unit()
+    {
+        return $this->hasOne(Unit::class, 'id', 'unit_id');
+    }
 }
