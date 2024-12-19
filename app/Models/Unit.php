@@ -14,4 +14,9 @@ class Unit extends Model
         'name',
         'status',
     ];
+
+    public function block()
+    {
+        return $this->hasOne(Block::class, 'id', 'block_id');
+    }
 }

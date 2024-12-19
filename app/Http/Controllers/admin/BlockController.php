@@ -37,7 +37,7 @@ class BlockController extends Controller
             $block->name = $request->name;
             $block->status = $request->status;
             $block->save();
-            Toastr::success('Product Category Added Successfully', 'Success');
+            Toastr::success('Block Added Successfully', 'Success');
             return redirect()->back();
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
@@ -54,7 +54,7 @@ class BlockController extends Controller
             $block->name = $request->name;
             $block->status = $request->status;
             $block->save();
-            Toastr::success('Product Category Updated Successfully', 'Success');
+            Toastr::success('Block Updated Successfully', 'Success');
             return redirect()->back();
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
@@ -66,7 +66,7 @@ class BlockController extends Controller
         try {
             $block = Block::find($id);
             $block->delete();
-            Toastr::success('Product Category Section Deleted Successfully', 'Success');
+            Toastr::success('Block Section Deleted Successfully', 'Success');
             return redirect()->back();
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());

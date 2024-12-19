@@ -198,6 +198,15 @@
                     </li>
                 @endcan
 
+                @can('unit-section-list')
+                    <li class="side-nav-item">
+                        <a href="{{route('unit')}}" class="side-nav-link">
+                            <i class="ri-home-5-line"></i>
+                            <span> Unit </span>
+                        </a>
+                    </li>
+                @endcan
+
 
                 @can('site-setting')
                     <li class="side-nav-item">
