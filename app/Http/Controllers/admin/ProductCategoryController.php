@@ -14,7 +14,7 @@ class ProductCategoryController extends Controller
     {
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
-            if (!Gate::allows('product-category-list')) {
+            if (!Gate::allows('product-category-section-list')) {
                 return redirect()->route('unauthorized.action');
             }
             return $next($request);

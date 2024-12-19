@@ -53,7 +53,6 @@ class CustomerController extends Controller
             ]);
             $customer = Customer::find($id);
             $customer->name = $request->name;
-            $customer->name = $request->name;
             $customer->email = $request->email;
             $customer->phone = $request->phone;
             $customer->address = $request->address;

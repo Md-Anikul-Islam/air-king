@@ -24,34 +24,30 @@ class PermissionTableSeeder extends Seeder
             'user-delete',
 
             //For Product Category
-            'product-category-list',
             'product-category-section-list',
             'product-category-section-create',
             'product-category-section-edit',
             'product-category-section-delete',
 
             //For Color
-            'color-list',
             'color-section-list',
             'color-section-create',
             'color-section-edit',
             'color-section-delete',
 
             //For Customer
-            'customer-list',
             'customer-section-list',
             'customer-section-create',
             'customer-section-edit',
             'customer-section-delete',
 
             //For Supplier
-            'supplier-list',
             'supplier-section-list',
             'supplier-section-create',
             'supplier-section-edit',
             'supplier-section-delete',
 
-        
+
 
             //Employee Section of hr management
             'hr-section-list',

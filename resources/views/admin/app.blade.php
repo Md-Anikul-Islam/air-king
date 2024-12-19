@@ -109,18 +109,6 @@
                 </li>
 
 
-                @can('news-list')
-                <li class="side-nav-item">
-                    <a href="{{route('news.section')}}" class="side-nav-link">
-                        <i class="ri-slideshow-line"></i>
-                        <span> News </span>
-                    </a>
-                </li>
-                @endcan
-
-
-
-
 
                 @can('hr-section-list')
                     <li class="side-nav-item">
@@ -146,9 +134,9 @@
                         </div>
                     </li>
                 @endcan
-                
 
-                @can('color-list')
+
+                @can('color-section-list')
                     <li class="side-nav-item">
                         <a href="{{route('color')}}" class="side-nav-link">
                             <i class="ri-palette-line"></i>
@@ -157,7 +145,7 @@
                     </li>
                 @endcan
 
-                @can('product-category-list')
+                @can('product-category-section-list')
                     <li class="side-nav-item">
                         <a href="{{route('productCategory')}}" class="side-nav-link">
                             <i class="ri-shopping-bag-line"></i>
@@ -166,7 +154,7 @@
                     </li>
                 @endcan
 
-                @can('customer-list')
+                @can('customer-section-list')
                     <li class="side-nav-item">
                         <a href="{{route('customer')}}" class="side-nav-link">
                             <i class="ri-user-line"></i>
@@ -175,7 +163,7 @@
                     </li>
                 @endcan
 
-                @can('supplier-list')
+                @can('supplier-section-list')
                     <li class="side-nav-item">
                         <a href="{{route('supplier')}}" class="side-nav-link">
                             <i class="ri-truck-line"></i>

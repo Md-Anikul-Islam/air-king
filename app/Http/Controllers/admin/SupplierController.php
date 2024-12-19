@@ -53,7 +53,6 @@ class SupplierController extends Controller
             ]);
             $supplier = Supplier::find($id);
             $supplier->name = $request->name;
-            $supplier->name = $request->name;
             $supplier->email = $request->email;
             $supplier->phone = $request->phone;
             $supplier->address = $request->address;
