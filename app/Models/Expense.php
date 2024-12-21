@@ -16,4 +16,8 @@ class Expense extends Model
         'rate',
         'status',
     ];
+    public function expenseType()
+    {
+        return $this->belongsTo(ExpenseType::class, 'expense_type_id');
+    }
 }

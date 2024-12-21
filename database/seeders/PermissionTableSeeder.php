@@ -25,6 +25,7 @@ class PermissionTableSeeder extends Seeder
 
             //Product Design
             'product-design-manage',
+
             //For Product Category
             'product-category-section-list',
             'product-category-section-create',
@@ -107,6 +108,11 @@ class PermissionTableSeeder extends Seeder
             'expenseType-section-create',
             'expenseType-section-edit',
             'expenseType-section-delete',
+
+            'expense-section-list',
+            'expense-section-create',
+            'expense-section-edit',
+            'expense-section-delete',
 
 
             //For Role and permission

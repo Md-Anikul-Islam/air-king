@@ -228,11 +228,15 @@
                         <div class="collapse" id="sidebarPages301">
                             <ul class="side-nav-second-level">
                                 @can('expenseType-section-list')
+                                <li>
+                                    <a href="{{route('expenseType')}}">Expense Type</a>
+                                </li>
+                                @endcan
+                                @can('expense-section-list')
                                     <li>
-                                        <a href="{{route('expenseType')}}">Expense Type</a>
+                                        <a href="{{route('expense')}}">Expense</a>
                                     </li>
                                 @endcan
-
                             </ul>
                         </div>
                     </li>
