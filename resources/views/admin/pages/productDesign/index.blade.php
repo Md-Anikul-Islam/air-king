@@ -78,11 +78,6 @@
                                 @endforeach
                             </td>
 
-
-
-
-
-
                             <td class="{{ $productDesignData->status == 1 ? '' : 'text-danger' }}">
                                 {{ $productDesignData->status == 1 ? 'Active' : 'Inactive' }}
                             </td>
