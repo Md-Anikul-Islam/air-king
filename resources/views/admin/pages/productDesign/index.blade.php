@@ -46,8 +46,9 @@
                         <tr>
                             <td>{{$key+1}}</td>
                             <td>{{$productDesignData->productCategory->name}}</td>
-                            <td>{{$productDesignData->productColor->name}}</td>
                             <td>{{$productDesignData->product_name}}</td>
+                            <td>{{$productDesignData->productColor->name}}</td>
+
                             <td>{{$productDesignData->product_version}}</td>
 
                             <td>
