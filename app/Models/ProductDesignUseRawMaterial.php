@@ -12,6 +12,7 @@ class ProductDesignUseRawMaterial extends Model
         'product_design_id',
         'raw_material_id',
         'quantity',
+        'per_unit_price',
         'status',
     ];
 

@@ -52,10 +52,12 @@ class ProductDesignController extends Controller
         if ($request->has('raw_material_id')) {
             foreach ($request->raw_material_id as $index => $rawMaterialId) {
                 $quantity = $request->quantity[$index];
+                $rawMaterial = RawMaterial::find($rawMaterialId);
                 ProductDesignUseRawMaterial::create([
                     'product_design_id' => $productDesign->id,
                     'raw_material_id' => $rawMaterialId,
                     'quantity' => $quantity,
+                    'per_unit_price' => $rawMaterial->raw_material_price,
                 ]);
             }
         }

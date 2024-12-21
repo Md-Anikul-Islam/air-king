@@ -35,7 +35,8 @@
                         <th>Version</th>
                         <th>Use Raw Metrical Name</th>
                         <th>Use Raw Metrical Qty</th>
-                        <th>UseRaw Metrical Price</th>
+                        <th>Raw Metrical Price</th>
+                        <th>Use Raw Metrical Price</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -67,7 +68,13 @@
 
                             <td>
                                 @foreach($productDesignData->rawMaterials as $rawMaterial)
-                                    <div>{{ $rawMaterial->rawMaterial->price ?? 'N/A' }}</div>
+                                    <div>{{ $rawMaterial->per_unit_price ?? 'N/A' }}</div>
+                                @endforeach
+                            </td>
+
+                            <td>
+                                @foreach($productDesignData->rawMaterials as $rawMaterial)
+                                    <div>{{ $rawMaterial->per_unit_price ? $rawMaterial->per_unit_price*$rawMaterial->quantity:  'N/A' }}</div>
                                 @endforeach
                             </td>
 
@@ -183,9 +190,6 @@
 {{--                                                    <div class="col-6">--}}
 {{--                                                        <button type="button" class="btn btn-primary add-raw-material" data-target="#raw-material-fields-{{$productDesignData->id}}">➕</button>--}}
 {{--                                                    </div>--}}
-
-
-
                                                 </div>
                                                 <div class="d-flex justify-content-end">
                                                     <button class="btn btn-primary" type="submit">Update</button>

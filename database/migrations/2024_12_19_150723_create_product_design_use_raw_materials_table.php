@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('product_design_id');
             $table->integer('raw_material_id');
             $table->integer('quantity');
+            $table->decimal('per_unit_price', 10, 2);
             $table->tinyInteger('status')->default(1);
             $table->softDeletes();
             $table->timestamps();
