@@ -27,6 +27,7 @@ class RawMaterialController extends Controller
         $rawMaterialSection = RawMaterialSection::latest()->get();
         $supplier = Supplier::latest()->get();
         $rawMaterial = RawMaterial::latest()->get();
+
         return view('admin.pages.rawMaterial.index', compact('rawMaterial', 'rawMaterialSection', 'supplier'));
     }
 

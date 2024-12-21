@@ -29,9 +29,9 @@ class ProductDesignController extends Controller
         $productCategory = ProductCategory::latest()->get();
         $productDesign = ProductDesign::with(['productCategory', 'productColor', 'rawMaterials'])->latest()->get();
         $color = Color::latest()->get();
-        $rawMaterial = RawMaterial::latest()->get();
+        $rawMaterialInfo = RawMaterial::latest()->get();
         return view('admin.pages.productDesign.index', compact('productCategory', 'productDesign',
-            'color', 'rawMaterial'));
+            'color', 'rawMaterialInfo'));
     }
 
     public function store(Request $request)
@@ -83,6 +83,7 @@ class ProductDesignController extends Controller
                 'product_name' => $request->product_name,
                 'product_color_id' => $request->product_color_id,
                 'product_version' => $request->product_version,
+                'status' => $request->status,
             ]);
 
             // Remove old raw material associations

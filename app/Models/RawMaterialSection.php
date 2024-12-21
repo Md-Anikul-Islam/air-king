@@ -13,4 +13,9 @@ class RawMaterialSection extends Model
         'name',
         'status',
     ];
+
+    public function rawMaterial()
+    {
+        return $this->hasMany(RawMaterial::class, 'raw_material_section_id');
+    }
 }

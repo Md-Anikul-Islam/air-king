@@ -29,7 +29,13 @@
                     <thead>
                     <tr>
                         <th>S/N</th>
-                        <th>Product Name</th>
+                        <th>Category</th>
+                        <th>Name</th>
+                        <th>Color</th>
+                        <th>Version</th>
+                        <th>Use Raw Metrical Name</th>
+                        <th>Use Raw Metrical Qty</th>
+                        <th>UseRaw Metrical Price</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -38,7 +44,38 @@
                     @foreach($productDesign as $key=> $productDesignData)
                         <tr>
                             <td>{{$key+1}}</td>
+                            <td>{{$productDesignData->productCategory->name}}</td>
+                            <td>{{$productDesignData->productColor->name}}</td>
                             <td>{{$productDesignData->product_name}}</td>
+                            <td>{{$productDesignData->product_version}}</td>
+
+                            <td>
+                                @foreach($productDesignData->rawMaterials as $rawMaterial)
+                                    @if($rawMaterial->rawMaterial)
+                                        <div>{{ $rawMaterial->rawMaterial->raw_material_name }}</div>
+                                    @else
+                                        <div>N/A</div>
+                                    @endif
+                                @endforeach
+                            </td>
+
+                            <td>
+                                @foreach($productDesignData->rawMaterials as $rawMaterial)
+                                    <div>{{ $rawMaterial->quantity }}</div>
+                                @endforeach
+                            </td>
+
+                            <td>
+                                @foreach($productDesignData->rawMaterials as $rawMaterial)
+                                    <div>{{ $rawMaterial->rawMaterial->price ?? 'N/A' }}</div>
+                                @endforeach
+                            </td>
+
+
+
+
+
+
                             <td class="{{ $productDesignData->status == 1 ? '' : 'text-danger' }}">
                                 {{ $productDesignData->status == 1 ? 'Active' : 'Inactive' }}
                             </td>
@@ -115,6 +152,38 @@
                                                             </select>
                                                         </div>
                                                     </div>
+
+
+                                                    <div id="raw-material-fields-{{$productDesignData->id}}">
+                                                        @foreach($productDesignData->rawMaterials as $rawMaterial)
+                                                            <div class="row raw-material-field mb-3">
+                                                                <div class="col-5">
+                                                                    <label class="form-label">Raw Material</label>
+                                                                    <select name="raw_material_id[]" class="form-select">
+                                                                        <option value="" selected>Select Raw Material</option>
+                                                                        @foreach($rawMaterialInfo as $rawMaterialInfoData)
+                                                                            <option value="{{ $rawMaterialInfoData->id }}" {{ $rawMaterial->raw_material_id == $rawMaterialInfoData->id ? 'selected' : '' }}>
+                                                                                {{ $rawMaterialInfoData->raw_material_name }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-5">
+                                                                    <label class="form-label">Quantity</label>
+                                                                    <input type="number" name="quantity[]" class="form-control" placeholder="Enter Quantity" value="{{ $rawMaterial->quantity }}" required>
+                                                                </div>
+                                                                <div class="col-2 d-flex align-items-end">
+                                                                    <button type="button" class="btn btn-danger remove-raw-material-field">Remove</button>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <button type="button" class="btn btn-primary add-raw-material" data-target="#raw-material-fields-{{$productDesignData->id}}">➕</button>
+                                                    </div>
+
+
+
 
                                                 </div>
                                                 <div class="d-flex justify-content-end">
@@ -210,8 +279,8 @@
                                         <label class="form-label">Raw Material</label>
                                         <select name="raw_material_id[]" class="form-select">
                                             <option value="" selected>Select Raw Material</option>
-                                            @foreach($rawMaterial as $material)
-                                                <option value="{{ $material->id }}">{{ $material->raw_material_name }}</option>
+                                            @foreach($rawMaterialInfo as $rawMaterialInfoData)
+                                                <option value="{{ $rawMaterialInfoData->id }}">{{ $rawMaterialInfoData->raw_material_name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -223,7 +292,6 @@
                                         <button type="button" class="btn btn-danger remove-raw-material-field">Remove</button>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="col-6">
                                 <button type="button" class="btn btn-primary" id="add-raw-material">➕</button>
@@ -250,8 +318,8 @@
                 <label class="form-label">Raw Material</label>
                 <select name="raw_material_id[]" class="form-select">
                     <option value="" selected>Select Raw Material</option>
-                    @foreach($rawMaterial as $material)
-                      <option value="{{ $material->id }}">{{ $material->raw_material_name }}</option>
+                    @foreach($rawMaterialInfo as $rawMaterialInfoData)
+                      <option value="{{ $rawMaterialInfoData->id }}">{{ $rawMaterialInfoData->raw_material_name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -272,51 +340,43 @@
                 e.target.closest('.raw-material-field').remove();
             }
         });
+    </script>
 
+    <script>
+        document.addEventListener('click', function (e) {
+            // Handle Add Raw Material Button (for both Add and Edit Modals)
+            if (e.target.classList.contains('add-raw-material')) {
+                const targetId = e.target.getAttribute('data-target'); // Get the target container
+                const container = document.querySelector(targetId);
+                if (container) {
+                    const newField = document.createElement('div');
+                    newField.classList.add('row', 'raw-material-field', 'mb-3');
+                    newField.innerHTML = `
+                    <div class="col-5">
+                        <label class="form-label">Raw Material</label>
+                        <select name="raw_material_id[]" class="form-select">
+                            <option value="" selected>Select Raw Material</option>
+                            @foreach($rawMaterialInfo as $rawMaterialInfoData)
+                            <option value="{{ $rawMaterialInfoData->id }}">{{ $rawMaterialInfoData->raw_material_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-5">
+                        <label class="form-label">Quantity</label>
+                        <input type="number" name="quantity[]" class="form-control" placeholder="Enter Quantity" required>
+                    </div>
+                    <div class="col-2 d-flex align-items-end">
+                        <button type="button" class="btn btn-danger remove-raw-material-field">Remove</button>
+                    </div>`;
+                    container.appendChild(newField);
+                }
+            }
 
-        // document.querySelectorAll('[id^=add-more-]').forEach(button => {
-        //     button.addEventListener('click', function () {
-        //         const packageId = this.id.split('-')[2];
-        //         const nameFieldsContainer = document.getElementById(`edit-name-fields-${packageId}`);
-        //
-        //         const newField = document.createElement('div');
-        //         newField.classList.add('row', 'name-field', 'mb-3');
-        //         newField.innerHTML = `
-        //     <div class="col-10">
-        //         <label for="product" class="form-label">Product Name</label>
-        //         <input type="text" class="form-control product-input" placeholder="Enter Product Name">
-        //     </div>
-        //     <div class="col-2 d-flex align-items-end">
-        //         <button type="button" class="btn btn-danger remove-field">Remove</button>
-        //     </div>
-        // `;
-        //         nameFieldsContainer.appendChild(newField);
-        //     });
-        // });
-        //
-        //
-        // document.querySelectorAll('[id^=edit-name-fields-]').forEach(container => {
-        //     container.addEventListener('click', function (e) {
-        //         if (e.target.classList.contains('remove-field')) {
-        //             e.target.closest('.name-field').remove();
-        //         }
-        //     });
-        // });
-        //
-        //
-        // document.querySelectorAll('form').forEach(form => {
-        //     form.addEventListener('submit', function (e) {
-        //         const packageId = form.getAttribute('action').split('/').pop();
-        //         const hiddenField = document.getElementById(`products-json-${packageId}`);
-        //         const nameFieldsContainer = document.getElementById(`edit-name-fields-${packageId}`);
-        //         const inputs = nameFieldsContainer.querySelectorAll('.product-input');
-        //
-        //         const products = Array.from(inputs).map(input => input.value.trim()).filter(value => value !== '');
-        //         hiddenField.value = JSON.stringify(products);
-        //     });
-        // });
-
-
+            // Handle Remove Raw Material Button
+            if (e.target.classList.contains('remove-raw-material-field')) {
+                e.target.closest('.raw-material-field').remove();
+            }
+        });
     </script>
 
 @endsection

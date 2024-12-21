@@ -35,7 +35,6 @@ class ExpenseTypeController extends Controller
             ]);
             $expenseType = new ExpenseType();
             $expenseType->name = $request->name;
-            $expenseType->status = $request->status;
             $expenseType->save();
             Toastr::success('Expense Type Added Successfully', 'Success');
             return redirect()->back();
