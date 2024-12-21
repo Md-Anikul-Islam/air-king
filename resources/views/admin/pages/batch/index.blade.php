@@ -32,6 +32,7 @@
                         <th>S/N</th>
                         <th>Batch</th>
                         <th>Date</th>
+                        <th>Available</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -42,6 +43,9 @@
                             <td>{{$key+1}}</td>
                             <td>{{$data->batch_no}}</td>
                             <td>{{$data->batch_date}}</td>
+                            <td class="{{ $data->is_completed == 0 ? 'text-primary' : 'text-danger' }}">
+                                {{ $data->status == 0 ? 'Available' : 'Not Available' }}
+                            </td>
                             <td class="{{ $data->status == 1 ? '' : 'text-danger' }}">
                                 {{ $data->status == 1 ? 'Active' : 'Inactive' }}
                             </td>
@@ -66,8 +70,7 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4 class="modal-title" id="addNewModalLabel{{$data->id}}">Edit</h4>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <form method="post" action="{{route('batch.update',$data->id)}}"

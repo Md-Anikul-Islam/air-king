@@ -90,18 +90,19 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-6">
+                                                    <div class="col-12">
                                                         <div class="mb-3">
                                                             <label for="logo" class="form-label">logo </label>
-                                                            @if(!empty($data->logo))
-                                                                <div class="mb-2">
-                                                                    <img src="{{ asset('uploads/brand-logo/' . $data->logo) }}" 
-                                                                        alt="Current Logo" 
-                                                                        style="width: 80px; height: auto; border: 1px solid #ddd; padding: 5px;">
-                                                                </div>
-                                                            @endif
+
                                                             <input type="file" name="logo"
                                                                 class="form-control">
+                                                            @if(!empty($data->logo))
+                                                                <div class="mb-2">
+                                                                    <img src="{{ asset('uploads/brand-logo/' . $data->logo) }}"
+                                                                         alt="Current Logo"
+                                                                         style="width: 80px; height: auto; border: 1px solid #ddd; padding: 5px;">
+                                                                </div>
+                                                            @endif
                                                         </div>
                                                     </div>
 
