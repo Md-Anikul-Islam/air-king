@@ -15,6 +15,7 @@ use App\Http\Controllers\admin\CustomerController;
 use App\Http\Controllers\admin\BlockController;
 use App\Http\Controllers\admin\UnitController;
 use App\Http\Controllers\admin\WareHouseController;
+use App\Http\Controllers\admin\ExpenseController;
 use App\Http\Controllers\admin\ExpenseTypeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -112,6 +113,12 @@ Route::middleware('auth')->group(callback: function () {
     Route::put('/wareHouse-update/{id}', [WareHouseController::class, 'update'])->name('wareHouse.update');
     Route::get('/wareHouse-delete/{id}', [WareHouseController::class, 'destroy'])->name('wareHouse.destroy');
     Route::get('/get-units/{block_id}', [WareHouseController::class, 'getUnits'])->name('get.units');
+
+    //Expense Types
+    Route::get('/expense', [ExpenseController::class, 'index'])->name('expense');
+    Route::post('/expense-store', [ExpenseController::class, 'store'])->name('expense.store');
+    Route::put('/expense-update/{id}', [ExpenseController::class, 'update'])->name('expense.update');
+    Route::get('/expense-delete/{id}', [ExpenseController::class, 'destroy'])->name('expense.destroy');
 
     //Expense Types
     Route::get('/expenseType', [ExpenseTypeController::class, 'index'])->name('expenseType');

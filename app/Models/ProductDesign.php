@@ -19,7 +19,7 @@ class ProductDesign extends Model
     public function productCategory()
     {
         return $this->belongsTo(ProductCategory::class);
-    }
+    } 
 
     public function productColor()
     {
