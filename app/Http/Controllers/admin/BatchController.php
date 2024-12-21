@@ -23,7 +23,7 @@ class BatchController extends Controller
     public function index()
     {
         $batches = Batch::latest()->get();
-        $page_title = 'Bathes';
+        $page_title = 'Batches';
         return view('admin.pages.batch.index', compact('batches', 'page_title'));
     }
 
