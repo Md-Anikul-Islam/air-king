@@ -13,6 +13,8 @@ use App\Http\Controllers\admin\ColorController;
 use App\Http\Controllers\admin\SupplierController;
 use App\Http\Controllers\admin\CustomerController;
 use App\Http\Controllers\admin\BlockController;
+use App\Http\Controllers\admin\BatchController;
+use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\UnitController;
 use App\Http\Controllers\admin\WareHouseController;
 use App\Http\Controllers\admin\ExpenseController;
@@ -113,6 +115,18 @@ Route::middleware('auth')->group(callback: function () {
     Route::put('/wareHouse-update/{id}', [WareHouseController::class, 'update'])->name('wareHouse.update');
     Route::get('/wareHouse-delete/{id}', [WareHouseController::class, 'destroy'])->name('wareHouse.destroy');
     Route::get('/get-units/{block_id}', [WareHouseController::class, 'getUnits'])->name('get.units');
+
+    //Brands
+    Route::get('/brand', [BrandController::class, 'index'])->name('brand');
+    Route::post('/brand-store', [BrandController::class, 'store'])->name('brand.store');
+    Route::put('/brand-update/{id}', [BrandController::class, 'update'])->name('brand.update');
+    Route::get('/brand-delete/{id}', [BrandController::class, 'destroy'])->name('brand.destroy');
+
+    //Brands
+    Route::get('/batch', [BatchController::class, 'index'])->name('batch');
+    Route::post('/batch-store', [BatchController::class, 'store'])->name('batch.store');
+    Route::put('/batch-update/{id}', [BatchController::class, 'update'])->name('batch.update');
+    Route::get('/batch-delete/{id}', [BatchController::class, 'destroy'])->name('batch.destroy');
 
     //Expense Types
     Route::get('/expense', [ExpenseController::class, 'index'])->name('expense');

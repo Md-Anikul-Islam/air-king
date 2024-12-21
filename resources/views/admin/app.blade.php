@@ -212,6 +212,16 @@
                                         <a href="{{route('wareHouse')}}">Warehouse</a>
                                     </li>
                                 @endcan
+                                @can('brand-section-list')
+                                    <li>
+                                        <a href="{{route('brand')}}">Brand</a>
+                                    </li>
+                                @endcan
+                                @can('batch-section-list')
+                                    <li>
+                                        <a href="{{route('batch')}}">Batch</a>
+                                    </li>
+                                @endcan
                             </ul>
                         </div>
                     </li>

@@ -90,16 +90,30 @@ class PermissionTableSeeder extends Seeder
             'block-section-create',
             'block-section-edit',
             'block-section-delete',
+
             //For Unit
             'unit-section-list',
             'unit-section-create',
             'unit-section-edit',
             'unit-section-delete',
+
             //For Warehouse
             'wareHouse-section-list',
             'wareHouse-section-create',
             'wareHouse-section-edit',
             'wareHouse-section-delete',
+
+            //For Brand
+            'brand-section-list',
+            'brand-section-create',
+            'brand-section-edit',
+            'brand-section-delete',
+
+            // For Batch
+            'batch-section-list',
+            'batch-section-create',
+            'batch-section-edit',
+            'batch-section-delete',
 
             //For Expense
             'expense-manage',
@@ -109,6 +123,7 @@ class PermissionTableSeeder extends Seeder
             'expenseType-section-edit',
             'expenseType-section-delete',
 
+            //For Expense Section
             'expense-section-list',
             'expense-section-create',
             'expense-section-edit',
