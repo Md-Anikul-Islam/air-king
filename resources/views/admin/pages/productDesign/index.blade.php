@@ -154,6 +154,8 @@
                                                     </div>
 
 
+                                                    <input type="hidden" name="raw_materials_json" id="raw-materials-json-{{$productDesignData->id}}" value="{{ json_encode($productDesignData->rawMaterials->pluck('raw_material_id', 'quantity')->toArray()) }}">
+
                                                     <div id="raw-material-fields-{{$productDesignData->id}}">
                                                         @foreach($productDesignData->rawMaterials as $rawMaterial)
                                                             <div class="row raw-material-field mb-3">
@@ -178,10 +180,9 @@
                                                             </div>
                                                         @endforeach
                                                     </div>
-                                                    <div class="col-6">
-                                                        <button type="button" class="btn btn-primary add-raw-material" data-target="#raw-material-fields-{{$productDesignData->id}}">➕</button>
-                                                    </div>
-
+{{--                                                    <div class="col-6">--}}
+{{--                                                        <button type="button" class="btn btn-primary add-raw-material" data-target="#raw-material-fields-{{$productDesignData->id}}">➕</button>--}}
+{{--                                                    </div>--}}
 
 
 
@@ -344,9 +345,8 @@
 
     <script>
         document.addEventListener('click', function (e) {
-            // Handle Add Raw Material Button (for both Add and Edit Modals)
             if (e.target.classList.contains('add-raw-material')) {
-                const targetId = e.target.getAttribute('data-target'); // Get the target container
+                const targetId = e.target.getAttribute('data-target');
                 const container = document.querySelector(targetId);
                 if (container) {
                     const newField = document.createElement('div');
@@ -371,8 +371,6 @@
                     container.appendChild(newField);
                 }
             }
-
-            // Handle Remove Raw Material Button
             if (e.target.classList.contains('remove-raw-material-field')) {
                 e.target.closest('.raw-material-field').remove();
             }
