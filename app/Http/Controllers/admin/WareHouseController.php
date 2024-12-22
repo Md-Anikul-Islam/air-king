@@ -47,7 +47,6 @@ class WareHouseController extends Controller
             $wareHouse->unit_id = $request->unit_id;
             $wareHouse->name = $request->name;
             $wareHouse->cost = $request->cost;
-            $wareHouse->status = $request->status;
             $wareHouse->save();
             Toastr::success('Warehouse Added Successfully', 'Success');
             return redirect()->back();
