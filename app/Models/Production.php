@@ -17,4 +17,24 @@ class Production extends Model
         'production_status',
         'warehouse_id',
     ];
+
+    public function product_design()
+    {
+        return $this->belongsTo(ProductDesign::class, 'production_design_id');
+    }
+
+    public function batch()
+    {
+        return $this->belongsTo(Batch::class, 'batch_id');
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class, 'brand_id');
+    }
+
+    public function warehouse()
+    {
+        return $this->belongsTo(WareHouse::class, 'warehouse_id');
+    }
 }

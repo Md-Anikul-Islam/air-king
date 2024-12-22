@@ -7,7 +7,9 @@ use App\Models\Batch;
 use App\Models\Brand;
 use App\Models\ProductDesign;
 use App\Models\ProductDesignUseRawMaterial;
+use App\Models\Production;
 use App\Models\RawMaterial;
+use App\Models\WareHouse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Yoeunes\Toastr\Facades\Toastr;
@@ -18,7 +20,7 @@ class ProductionController extends Controller
     {
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
-            if (!Gate::allows('production-list')) {
+            if (!Gate::allows('production-section-list')) {
                 return redirect()->route('unauthorized.action');
             }
             return $next($request);
@@ -26,109 +28,93 @@ class ProductionController extends Controller
     }
     public function index()
     {
-        $productDesign = ProductDesign::latest()->get();
-        $batch = Batch::where('status', 0)->latest()->get();
-        $brand= Brand::latest()->get();
-        return view('admin.pages.production.index', compact('productDesign', 'batch',
-            'brand'));
+        $productions = Production::latest()->get();
+        $productDesigns = ProductDesign::latest()->get();
+        $batches = Batch::where('status', 0)->get();
+        $brands = Brand::latest()->get();
+        $wareHouses = WareHouse::latest()->get();
+        return view('admin.pages.production.index', compact('productions', 'productDesigns', 'batches',
+            'brands', 'wareHouses'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'product_category_id' => 'required',
-            'product_name' => 'required',
-            'product_color_id' => 'required',
-            'product_version' => 'required',
-        ]);
-        $productDesign = new ProductDesign();
-        $productDesign->product_category_id = $request->product_category_id;
-        $productDesign->product_name = $request->product_name;
-        $productDesign->product_color_id = $request->product_color_id;
-        $productDesign->product_version = $request->product_version;
-        $productDesign->save();
-        // Handling multiple entries for raw materials and quantities
-        if ($request->has('raw_material_id')) {
-            foreach ($request->raw_material_id as $index => $rawMaterialId) {
-                $quantity = $request->quantity[$index];
-                $rawMaterial = RawMaterial::find($rawMaterialId);
-                ProductDesignUseRawMaterial::create([
-                    'product_design_id' => $productDesign->id,
-                    'raw_material_id' => $rawMaterialId,
-                    'quantity' => $quantity,
-                    'per_unit_price' => $rawMaterial->raw_material_price,
-                ]);
-            }
+        try {
+            $request->validate([
+                'production_design_id' => 'required',
+                'brand_id' => 'required',
+                'unit_price' => 'required',
+                'production_qty' => 'required',
+            ]);
+            $productions = new Production();
+            $productions->production_design_id = $request->production_design_id;
+            $productions->batch_id = $request->batch_id;
+            $productions->brand_id = $request->brand_id;
+            $productions->unit_price = $request->unit_price;
+            $productions->production_qty = $request->production_qty;
+            $productions->production_status = 1;
+            $productions->warehouse_id = 0;
+            $productions->save();
+            Toastr::success('Production Added Successfully', 'Success');
+            return redirect()->back();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
-        Toastr::success('Product Design Add Successfully', 'Success');
-        return redirect()->back();
+    }
+
+    public function change_status(Request $request, $id)
+    {
+        try {
+            $request->validate([
+                'production_status' => 'required',
+            ]);
+            $productions = Production::find($id);
+            $productions->production_status = $request->production_status;
+            if($request->production_status == 2){
+                $productions->warehouse_id = $request->warehouse_id;
+            }else{
+                $productions->warehouse_id = 0;
+            }
+            $productions->save();
+            Toastr::success('Production Added Successfully', 'Success');
+            return redirect()->back();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+        }
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'product_category_id' => 'required',
-            'product_name' => 'required',
-            'product_color_id' => 'required',
-            'product_version' => 'required',
-            'raw_material_id.*' => 'required|exists:raw_materials,id',
-            'quantity.*' => 'required|numeric|min:1'
-        ]);
-
         try {
-            \DB::beginTransaction();
-
-            $productDesign = ProductDesign::findOrFail($id);
-            $productDesign->update([
-                'product_category_id' => $request->product_category_id,
-                'product_name' => $request->product_name,
-                'product_color_id' => $request->product_color_id,
-                'product_version' => $request->product_version,
-                'status' => $request->status,
+            $request->validate([
+                'production_design_id' => 'required',
+                'brand_id' => 'required',
+                'unit_price' => 'required',
+                'production_qty' => 'required',
             ]);
-
-            // Remove old raw material associations
-            ProductDesignUseRawMaterial::where('product_design_id', $id)->delete();
-
-            // Re-add the updated raw materials and quantities
-            foreach ($request->raw_material_id as $index => $rawMaterialId) {
-                $quantity = $request->quantity[$index];
-                ProductDesignUseRawMaterial::create([
-                    'product_design_id' => $id,
-                    'raw_material_id' => $rawMaterialId,
-                    'quantity' => $quantity,
-                ]);
-            }
-
-            \DB::commit();
-            Toastr::success('Product Design Updated Successfully', 'Success');
+            $productions = Production::find($id);
+            $productions->production_design_id = $request->production_design_id;
+            $productions->batch_id = $request->batch_id;
+            $productions->brand_id = $request->brand_id;
+            $productions->unit_price = $request->unit_price;
+            $productions->production_qty = $request->production_qty;
+            $productions->save();
+            Toastr::success('Production Edited Successfully', 'Success');
             return redirect()->back();
         } catch (\Exception $e) {
-            \DB::rollBack();
-            Toastr::error('Failed to update product design. Error: ' . $e->getMessage(), 'Error');
-            return redirect()->back()->with('error', 'Failed to update product design. Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
 
     public function destroy($id)
     {
         try {
-            \DB::beginTransaction();
-
-            $productDesign = ProductDesign::findOrFail($id);
-            // Delete associated raw materials first
-            ProductDesignUseRawMaterial::where('product_design_id', $id)->delete();
-
-            // Then delete the product design itself
-            $productDesign->delete();
-
-            \DB::commit();
-            Toastr::success('Product Design Deleted Successfully', 'Success');
+            $production = Production::find($id);
+            $production->delete();
+            Toastr::success('Production Deleted Successfully', 'Success');
             return redirect()->back();
         } catch (\Exception $e) {
-            \DB::rollBack();
-            Toastr::error('Failed to delete product design. Error: ' . $e->getMessage(), 'Error');
-            return redirect()->back()->with('error', 'Failed to delete product design. Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
 }
