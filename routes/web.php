@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\EmployeeSectionController;
 use App\Http\Controllers\admin\ProductDesignController;
 use App\Http\Controllers\admin\RawMaterialController;
 use App\Http\Controllers\admin\RawMaterialSectionController;
+use App\Http\Controllers\admin\SaleHistoryController;
 use App\Http\Controllers\admin\SiteSettingController;
 use App\Http\Controllers\admin\ProductCategoryController;
 use App\Http\Controllers\admin\ColorController;
@@ -147,6 +148,10 @@ Route::middleware('auth')->group(callback: function () {
     Route::post('/expenseType-store', [ExpenseTypeController::class, 'store'])->name('expenseType.store');
     Route::put('/expenseType-update/{id}', [ExpenseTypeController::class, 'update'])->name('expenseType.update');
     Route::get('/expenseType-delete/{id}', [ExpenseTypeController::class, 'destroy'])->name('expenseType.destroy');
+
+    //sell History
+    Route::get('/sale-history', [SaleHistoryController::class, 'saleHistory'])->name('sale.history');
+
 
     //Role and User Section
     Route::resource('roles', RoleController::class);

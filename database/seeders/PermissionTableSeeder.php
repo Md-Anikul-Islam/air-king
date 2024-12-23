@@ -135,6 +135,9 @@ class PermissionTableSeeder extends Seeder
             'expense-section-edit',
             'expense-section-delete',
 
+            //For sale
+            'sale-history-list',
+
 
             //For Role and permission
             'role-and-permission-list',

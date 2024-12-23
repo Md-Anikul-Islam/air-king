@@ -269,6 +269,15 @@
                     </li>
                 @endcan
 
+                @can('sale-history-list')
+                    <li class="side-nav-item">
+                        <a href="{{route('sale.history')}}" class="side-nav-link">
+                            <i class="ri-shopping-cart-2-line"></i>
+                            <span> Sell History </span>
+                        </a>
+                    </li>
+                @endcan
+
 
                 @can('customer-section-list')
                     <li class="side-nav-item">

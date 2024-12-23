@@ -15,4 +15,15 @@ class SellProduction extends Model
         'sell_date',
         'unit_price',
     ];
+
+    public function production()
+    {
+        return $this->belongsTo(Production::class, 'production_id');
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
+
 }
