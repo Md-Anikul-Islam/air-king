@@ -33,11 +33,12 @@ class ProductionController extends Controller
     {
         $productions = Production::where('available_qty', '!=', 0)->latest()->get();
         $productDesigns = ProductDesign::latest()->get();
-        $batches = Batch::where('is_completed', 0)->get();
+        $availableBatches = Batch::where('is_completed', 0)->get();
+        $batches = Batch::latest()->get();
         $brands = Brand::latest()->get();
         $wareHouses = WareHouse::latest()->get();
         $customers = Customer::latest()->get();
-        return view('admin.pages.production.index', compact('productions', 'productDesigns', 'batches',
+        return view('admin.pages.production.index', compact('productions', 'productDesigns', 'availableBatches', 'batches',
             'brands', 'wareHouses', 'customers'));
     }
 
@@ -139,6 +140,7 @@ class ProductionController extends Controller
             $productions->brand_id = $request->brand_id;
             $productions->unit_price = $request->unit_price;
             $productions->production_qty = $request->production_qty;
+            $productions->available_qty = $request->production_qty - $productions->sell_qty;
             $productions->save();
             Toastr::success('Production Edited Successfully', 'Success');
             return redirect()->back();

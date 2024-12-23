@@ -319,8 +319,8 @@
                                     <label for="batch_id" class="form-label">Batch Name</label>
                                     <select name="batch_id" class="form-select">
                                         <option selected>Select Batch No</option>
-                                        @foreach($batches as $batchesData)
-                                            <option value="{{$batchesData->id}}">{{$batchesData->batch_no}}</option>
+                                        @foreach($availableBatches as $availableBatchesData)
+                                            <option value="{{$availableBatchesData->id}}">{{$availableBatchesData->batch_no}}</option>
                                         @endforeach
                                     </select>
                                 </div>
