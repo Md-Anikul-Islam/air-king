@@ -78,7 +78,6 @@ class ProductionController extends Controller
         try {
             $request->validate([
                 'production_status' => 'required',
-                'sell_date' => 'required',
             ]);
             $productions = Production::find($id);
             $productions->production_status = $request->production_status;
