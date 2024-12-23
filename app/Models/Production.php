@@ -39,4 +39,5 @@ class Production extends Model
     {
         return $this->belongsTo(WareHouse::class, 'warehouse_id');
     }
+
 }
