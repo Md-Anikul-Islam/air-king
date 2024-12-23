@@ -30,7 +30,7 @@ class ProductionController extends Controller
     {
         $productions = Production::latest()->get();
         $productDesigns = ProductDesign::latest()->get();
-        $batches = Batch::where('status', 0)->get();
+        $batches = Batch::where('is_completed', 0)->get();
         $brands = Brand::latest()->get();
         $wareHouses = WareHouse::latest()->get();
         return view('admin.pages.production.index', compact('productions', 'productDesigns', 'batches',
@@ -53,8 +53,13 @@ class ProductionController extends Controller
             $productions->unit_price = $request->unit_price;
             $productions->production_qty = $request->production_qty;
             $productions->production_status = 1;
-            $productions->warehouse_id = 0;
             $productions->save();
+
+            //same time also batches table  is_completed field update 1
+            $batch = Batch::find($request->batch_id);
+            $batch->is_completed = 1;
+            $batch->save();
+
             Toastr::success('Production Added Successfully', 'Success');
             return redirect()->back();
         } catch (\Exception $e) {

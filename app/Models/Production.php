@@ -14,6 +14,8 @@ class Production extends Model
         'brand_id',
         'unit_price',
         'production_qty',
+        'sell_qty',
+        'available_qty',
         'production_status',
         'warehouse_id',
     ];

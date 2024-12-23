@@ -34,6 +34,7 @@
                         <th>Unit</th>
                         <th>Name</th>
                         <th>Cost</th>
+                        <th>Booked or Not</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -46,9 +47,17 @@
                             <td>{{ $data->unit->name }}</td>
                             <td>{{$data->name}}</td>
                             <td>{{$data->cost}}</td>
+                            <td>
+                                @if ($data->is_already_booked == 1)
+                                    <span class="badge bg-success">Booked</span>
+                                @else
+                                    <span class="badge bg-danger">Not Booked</span>
+                                @endif
+                            </td>
                             <td class="{{ $data->status == 1 ? '' : 'text-danger' }}">
                                 {{ $data->status == 1 ? 'Active' : 'Inactive' }}
                             </td>
+
                             <td style="width: 100px;">
                                 <div class="d-flex justify-content-end gap-1">
                                     @can('wareHouse-section-edit')

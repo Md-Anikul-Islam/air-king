@@ -18,8 +18,10 @@ return new class extends Migration
             $table->integer('brand_id');
             $table->decimal('unit_price', 10, 2);
             $table->integer('production_qty');
+            $table->integer('sell_qty')->nullable();
+            $table->integer('available_qty')->nullable();
             $table->string('production_status');
-            $table->integer('warehouse_id');
+            $table->integer('warehouse_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
