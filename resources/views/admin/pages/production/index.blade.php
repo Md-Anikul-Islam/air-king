@@ -50,7 +50,7 @@
                         @foreach ($productions as $key => $data)
                             <tr>
                                 <td scope="row">{{ ++$key }}</td>
-                                <td>{{ $data->product_design->product_name }} {{ ($data->product_design->productCategory->name) }}</td>
+                                <td>{{ $data->product_design->product_name }} ({{ $data->product_design->productCategory->name }})</td>
                                 <td>{{ $data->batch->batch_no }}</td>
                                 <td>{{ $data->brand->name }}</td>
                                 <td>{{ $data->unit_price }}</td>
@@ -61,7 +61,7 @@
                                 <td style="width: 100px;">
                                     <div class="d-flex justify-content-end gap-1 text-nowrap">
                                         @can('production-section-edit')
-                                            <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal"
+                                            <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
                                                     data-bs-target="#changeStatusModal{{$data->id}}">Sell From Warehouse
                                             </button>
                                         @endcan
@@ -126,6 +126,12 @@
                                                                         <option value="{{ $customersData->id }}" {{ $customersData->customer_id == $customersData->id ? 'selected' : '' }}>{{ $customersData->name }}</option>
                                                                     @endforeach
                                                                 </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 sold_select_container">
+                                                            <div class="mb-3">
+                                                                <label for="sell_date" class="form-label">Sell date</label>
+                                                                <input type="date" id="sell_date" name="sell_date" class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="col-6 sold_select_container">
@@ -314,6 +320,15 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label for="raw_material_price" class="form-label">Raw Material Price</label>
+                                    <input type="number" id="raw_material_price" name="raw_material_price"
+                                           class="form-control" readonly>
+                                </div>
+                            </div>
+
                             <div class="col-12">
                                 <div class="mb-3">
                                     <label for="batch_id" class="form-label">Batch Name</label>
@@ -406,6 +421,13 @@
         });
 
     </script>
+
+    <script>
+        const sellDateInput = document.getElementById('sell_date');
+        const today = new Date().toISOString().split('T')[0];
+        sellDateInput.setAttribute('min', today);
+    </script>
+
 
 @endsection
 
