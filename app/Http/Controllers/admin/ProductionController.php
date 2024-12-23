@@ -78,6 +78,7 @@ class ProductionController extends Controller
         try {
             $request->validate([
                 'production_status' => 'required',
+                'sell_date' => 'required',
             ]);
             $productions = Production::find($id);
             $productions->production_status = $request->production_status;
@@ -99,7 +100,7 @@ class ProductionController extends Controller
                 $sellProduction->production_id = $productions->id;
                 $sellProduction->customer_id = $request->customer_id;
                 $sellProduction->sell_qty = $request->sell_qty;
-                $sellProduction->sell_date = date('Y-m-d');
+                $sellProduction->sell_date = $request->sell_date;
                 $sellProduction->unit_price = $productions->unit_price;
                 $sellProduction->save();
 
