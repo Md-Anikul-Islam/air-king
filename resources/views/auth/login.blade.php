@@ -28,12 +28,12 @@
                         <div class="col-lg-6">
                             <div class="d-flex flex-column h-100">
                                 <div class="auth-brand p-4">
-                                    @if (!empty($siteSetting->logo))
+                                    @if (!empty($siteSetting->site_preview_image))
                                         <a href="{{ url('/') }}" class="logo-light">
-                                            <img src="{{ $siteSetting->logo }}" alt="logo" height="100">
+                                            <img src="{{ $siteSetting->site_preview_image }}" alt="logo" height="100">
                                         </a>
                                         <a href="{{ url('/') }}" class="logo-dark">
-                                            <img src="{{ $siteSetting->logo }}" alt="dark logo" height="100">
+                                            <img src="{{ $siteSetting->site_preview_image }}" alt="dark logo" height="100">
                                         </a>
                                     @endif
                                 </div>
