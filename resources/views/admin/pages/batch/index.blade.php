@@ -44,7 +44,7 @@
                             <td>{{$data->batch_no}}</td>
                             <td>{{$data->batch_date}}</td>
                             <td class="{{ $data->is_completed == 0 ? 'text-primary' : 'text-danger' }}">
-                                {{ $data->status == 0 ? 'Available' : 'Not Available' }}
+                                {{ $data->is_completed == 0 ? 'Available' : 'Not Available' }}
                             </td>
                             <td class="{{ $data->status == 1 ? '' : 'text-danger' }}">
                                 {{ $data->status == 1 ? 'Active' : 'Inactive' }}

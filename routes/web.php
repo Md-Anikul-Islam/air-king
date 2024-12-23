@@ -14,6 +14,7 @@ use App\Http\Controllers\admin\SupplierController;
 use App\Http\Controllers\admin\CustomerController;
 use App\Http\Controllers\admin\BlockController;
 use App\Http\Controllers\admin\BatchController;
+use App\Http\Controllers\admin\ProductionController;
 use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\UnitController;
 use App\Http\Controllers\admin\WareHouseController;
@@ -122,11 +123,18 @@ Route::middleware('auth')->group(callback: function () {
     Route::put('/brand-update/{id}', [BrandController::class, 'update'])->name('brand.update');
     Route::get('/brand-delete/{id}', [BrandController::class, 'destroy'])->name('brand.destroy');
 
-    //Brands
+    //Batch
     Route::get('/batch', [BatchController::class, 'index'])->name('batch');
     Route::post('/batch-store', [BatchController::class, 'store'])->name('batch.store');
     Route::put('/batch-update/{id}', [BatchController::class, 'update'])->name('batch.update');
     Route::get('/batch-delete/{id}', [BatchController::class, 'destroy'])->name('batch.destroy');
+
+    //Production
+    Route::get('/production', [ProductionController::class, 'index'])->name('production');
+    Route::post('/production-store', [ProductionController::class, 'store'])->name('production.store');
+    Route::put('/production-update/{id}', [ProductionController::class, 'update'])->name('production.update');
+    Route::get('/production-delete/{id}', [ProductionController::class, 'destroy'])->name('production.destroy');
+    Route::put('/change-status/{id}', [ProductionController::class, 'change_status'])->name('production.change_status');
 
     //Expense Types
     Route::get('/expense', [ExpenseController::class, 'index'])->name('expense');
@@ -134,7 +142,7 @@ Route::middleware('auth')->group(callback: function () {
     Route::put('/expense-update/{id}', [ExpenseController::class, 'update'])->name('expense.update');
     Route::get('/expense-delete/{id}', [ExpenseController::class, 'destroy'])->name('expense.destroy');
 
-    //Expense Types
+    //Expense
     Route::get('/expenseType', [ExpenseTypeController::class, 'index'])->name('expenseType');
     Route::post('/expenseType-store', [ExpenseTypeController::class, 'store'])->name('expenseType.store');
     Route::put('/expenseType-update/{id}', [ExpenseTypeController::class, 'update'])->name('expenseType.update');

@@ -4,26 +4,33 @@
     $siteSetting = DB::table('site_settings')->first();
 @endphp
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Dashboard | Air King</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
-    <meta content="SDMGA" name="author" />
+    <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description"/>
+    <meta content="SDMGA" name="author"/>
     <link rel="shortcut icon" href="{{asset('backend/images/favicon.ico')}}">
     <!-- Select2 css -->
-    <link href="{{asset('backend/vendor/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('backend/vendor/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css"/>
     <!-- Datatables css -->
-    <link href="{{asset('backend/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('backend/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('backend/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('backend/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('backend/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('backend/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('backend/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet"
+          type="text/css"/>
+    <link href="{{asset('backend/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css')}}"
+          rel="stylesheet" type="text/css"/>
+    <link href="{{asset('backend/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css')}}"
+          rel="stylesheet" type="text/css"/>
+    <link href="{{asset('backend/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css')}}"
+          rel="stylesheet" type="text/css"/>
+    <link href="{{asset('backend/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css')}}" rel="stylesheet"
+          type="text/css"/>
+    <link href="{{asset('backend/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css')}}" rel="stylesheet"
+          type="text/css"/>
     <link rel="stylesheet" href="{{asset('backend/vendor/daterangepicker/daterangepicker.css')}}">
-    <link rel="stylesheet" href="{{asset('backend/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css')}}">
+    <link rel="stylesheet"
+          href="{{asset('backend/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css')}}">
     <script src="{{asset('backend/js/config.js')}}"></script>
-    <link href="{{asset('backend/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style" />
-    <link href="{{asset('backend/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('backend/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style"/>
+    <link href="{{asset('backend/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
     {{-- Custom Css File here --}}
     <link rel="stylesheet" href="{{ asset('backend/css/sdmg.min.css') }}">
     <script src="{{asset('backend/js/chart.js')}}"></script>
@@ -55,9 +62,10 @@
                 </li>
                 <li class="dropdown">
                     @php
-                       $admin = auth()->user();
+                        $admin = auth()->user();
                     @endphp
-                    <a class="nav-link dropdown-toggle arrow-none nav-user" data-bs-toggle="dropdown" href="#" role="button"
+                    <a class="nav-link dropdown-toggle arrow-none nav-user" data-bs-toggle="dropdown" href="#"
+                       role="button"
                        aria-haspopup="false" aria-expanded="false">
                         <span class="d-lg-block d-none">
                               <h5 class="my-0 fw-normal">{{$admin->name}}
@@ -73,7 +81,8 @@
                             <i class="ri-account-circle-line fs-18 align-middle me-1"></i>
                             <span>My Account</span>
                         </a>
-                        <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <a href="{{ route('logout') }}" class="dropdown-item"
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="ri-logout-box-line fs-18 align-middle me-1"></i>
                             <span>Logout</span>
                         </a>
@@ -109,10 +118,10 @@
                 </li>
 
 
-
                 @can('hr-section-list')
                     <li class="side-nav-item">
-                        <a data-bs-toggle="collapse" href="#sidebarPages101" aria-expanded="false" aria-controls="sidebarPages101" class="side-nav-link">
+                        <a data-bs-toggle="collapse" href="#sidebarPages101" aria-expanded="false"
+                           aria-controls="sidebarPages101" class="side-nav-link">
                             <i class="ri-user-2-line"></i>
                             <span>HR Payroll</span>
                             <span class="menu-arrow"></span>
@@ -138,7 +147,8 @@
 
                 @can('product-design-manage')
                     <li class="side-nav-item">
-                        <a data-bs-toggle="collapse" href="#sidebarPages102" aria-expanded="false" aria-controls="sidebarPages102" class="side-nav-link">
+                        <a data-bs-toggle="collapse" href="#sidebarPages102" aria-expanded="false"
+                           aria-controls="sidebarPages102" class="side-nav-link">
                             <i class="ri-pencil-ruler-2-line"></i>
                             <span>Product Design</span>
                             <span class="menu-arrow"></span>
@@ -188,7 +198,8 @@
 
                 @can('production-manage')
                     <li class="side-nav-item">
-                        <a data-bs-toggle="collapse" href="#sidebarPages201" aria-expanded="false" aria-controls="sidebarPages201" class="side-nav-link">
+                        <a data-bs-toggle="collapse" href="#sidebarPages201" aria-expanded="false"
+                           aria-controls="sidebarPages201" class="side-nav-link">
                             <i class="ri-tools-line"></i>
                             <span>Production</span>
                             <span class="menu-arrow"></span>
@@ -222,6 +233,11 @@
                                         <a href="{{route('batch')}}">Batch</a>
                                     </li>
                                 @endcan
+                                @can('production-section-list')
+                                    <li>
+                                        <a href="{{route('production')}}">Production</a>
+                                    </li>
+                                @endcan
                             </ul>
                         </div>
                     </li>
@@ -230,7 +246,8 @@
 
                 @can('expense-manage')
                     <li class="side-nav-item">
-                        <a data-bs-toggle="collapse" href="#sidebarPages301" aria-expanded="false" aria-controls="sidebarPages301" class="side-nav-link">
+                        <a data-bs-toggle="collapse" href="#sidebarPages301" aria-expanded="false"
+                           aria-controls="sidebarPages301" class="side-nav-link">
                             <i class="ri-money-dollar-circle-line"></i>
                             <span>Expense</span>
                             <span class="menu-arrow"></span>
@@ -238,9 +255,9 @@
                         <div class="collapse" id="sidebarPages301">
                             <ul class="side-nav-second-level">
                                 @can('expenseType-section-list')
-                                <li>
-                                    <a href="{{route('expenseType')}}">Expense Type</a>
-                                </li>
+                                    <li>
+                                        <a href="{{route('expenseType')}}">Expense Type</a>
+                                    </li>
                                 @endcan
                                 @can('expense-section-list')
                                     <li>
@@ -274,28 +291,29 @@
 
 
                 @can('role-and-permission-list')
-                <li class="side-nav-item">
-                    <a data-bs-toggle="collapse" href="#sidebarPages1" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
-                        <i class="ri-rotate-lock-line"></i>
-                        <span>Permission Manage </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarPages1">
-                        <ul class="side-nav-second-level">
-                            @can('user-list')
-                            <li>
-                                <a href="{{url('users')}}">Create User</a>
-                            </li>
-                            @endcan
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarPages1" aria-expanded="false"
+                           aria-controls="sidebarPages" class="side-nav-link">
+                            <i class="ri-rotate-lock-line"></i>
+                            <span>Permission Manage </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarPages1">
+                            <ul class="side-nav-second-level">
+                                @can('user-list')
+                                    <li>
+                                        <a href="{{url('users')}}">Create User</a>
+                                    </li>
+                                @endcan
 
-                            @can('role-list')
-                            <li>
-                                <a href="{{url('roles')}}">Role & Permission</a>
-                            </li>
-                            @endcan
-                        </ul>
-                    </div>
-                </li>
+                                @can('role-list')
+                                    <li>
+                                        <a href="{{url('roles')}}">Role & Permission</a>
+                                    </li>
+                                @endcan
+                            </ul>
+                        </div>
+                    </li>
                 @endcan
             </ul>
             <div class="clearfix"></div>
@@ -305,14 +323,15 @@
     <div class="content-page">
         <div class="content">
             <div class="container-fluid">
-              @yield('admin_content')
+                @yield('admin_content')
             </div>
         </div>
         <footer class="footer">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <script>document.write(new Date().getFullYear())</script> © Air King</b>
+                        <script>document.write(new Date().getFullYear())</script>
+                        © Air King</b>
                     </div>
                 </div>
             </div>
@@ -332,7 +351,8 @@
 <script src="{{asset('backend/vendor/daterangepicker/daterangepicker.js')}}"></script>
 <script src="{{asset('backend/vendor/apexcharts/apexcharts.min.js')}}"></script>
 <script src="{{asset('backend/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
-<script src="{{asset('backend/vendor/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js')}}"></script>
+<script
+    src="{{asset('backend/vendor/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js')}}"></script>
 <!-- Ckeditor Here -->
 <script src="{{asset('backend/js/sdmg.ckeditor.js')}}"></script>
 <!-- Datatables js -->

@@ -115,6 +115,12 @@ class PermissionTableSeeder extends Seeder
             'batch-section-edit',
             'batch-section-delete',
 
+            //For Production
+            'production-section-list',
+            'production-section-create',
+            'production-section-edit',
+            'production-section-delete',
+
             //For Expense
             'expense-manage',
             //For Expense Type
