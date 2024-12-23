@@ -97,7 +97,7 @@ class ProductionController extends Controller
                 $sellProduction = new SellProduction();
                 $sellProduction->production_id = $productions->id;
                 $sellProduction->customer_id = $request->customer_id;
-                $sellProduction->sell_qty = $productions->sell_qty;
+                $sellProduction->sell_qty = $request->sell_qty;
                 $sellProduction->sell_date = date('Y-m-d');
                 $sellProduction->unit_price = $productions->unit_price;
                 $sellProduction->save();
