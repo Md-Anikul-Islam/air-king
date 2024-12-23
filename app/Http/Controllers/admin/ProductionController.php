@@ -72,6 +72,9 @@ class ProductionController extends Controller
             $productions->production_status = $request->production_status;
             if($request->production_status == 2){
                 $productions->warehouse_id = $request->warehouse_id;
+                $wareHouse = WareHouse::find($request->warehouse_id);
+                $wareHouse->is_already_booked = 1;
+                $wareHouse->save();
             }else{
                 $productions->warehouse_id = 0;
             }
