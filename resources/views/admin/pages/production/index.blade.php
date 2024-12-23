@@ -39,6 +39,7 @@
                         <th>Brand</th>
                         <th>Unit Price</th>
                         <th>Production Qty</th>
+                        <th>Available Qty</th>
                         <th>Production Status</th>
                         <th>Warehouse</th>
                         <th>Action</th>
@@ -49,18 +50,19 @@
                         @foreach ($productions as $key => $data)
                             <tr>
                                 <td scope="row">{{ ++$key }}</td>
-                                <td>{{ $data->product_design->product_name }}</td>
+                                <td>{{ $data->product_design->product_name }} {{ ($data->product_design->productCategory->name) }}</td>
                                 <td>{{ $data->batch->batch_no }}</td>
                                 <td>{{ $data->brand->name }}</td>
                                 <td>{{ $data->unit_price }}</td>
                                 <td>{{ $data->production_qty }}</td>
-                                <td> {{ $data->production_status == 1 ? 'Production Process Done' : ($data->production_status == 2 ? 'Send To Warehouse' : 'Sold') }}</td>
+                                <td>{{ $data->available_qty }}</td>
+                                <td> {{ $data->production_status == 1 ? 'Production Process Done' : ($data->production_status == 2 ? 'Send To Warehouse' : 'Sales Initiated') }}</td>
                                 <td>{{ $data->warehouse->name ?? '' }}</td>
                                 <td style="width: 100px;">
                                     <div class="d-flex justify-content-end gap-1 text-nowrap">
                                         @can('production-section-edit')
                                             <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal"
-                                                    data-bs-target="#changeStatusModal{{$data->id}}">Change Status
+                                                    data-bs-target="#changeStatusModal{{$data->id}}">Sell From Warehouse
                                             </button>
                                         @endcan
                                         @can('production-section-edit')
@@ -85,55 +87,67 @@
                                     <div class="modal-dialog  modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title" id="addNewModalLabel{{$data->id}}">Edit</h4>
+                                                <h4 class="modal-title" id="changeStatusModalLabel{{$data->id}}">Selling Product</h4>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form method="post"
-                                                      action="{{route('production.change_status',$data->id)}}"
-                                                      enctype="multipart/form-data">
+                                                <form method="post" action="{{ route('production.change_status', $data->id) }}" enctype="multipart/form-data">
                                                     @csrf
                                                     @method('PUT')
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <div class="mb-3">
-                                                                <label for="production_status" class="form-label">Production
-                                                                    Status</label>
-                                                                <select name="production_status"
-                                                                        class="form-select prodcution_status_select"
-                                                                        required>
-                                                                    <option
-                                                                        value="1" {{ $data->production_status == 1 ? 'selected' : '' }}>
-                                                                        Production Process Done
-                                                                    </option>
-                                                                    <option
-                                                                        value="2" {{ $data->production_status == 2 ? 'selected' : '' }}>
-                                                                        Send To Warehouse
-                                                                    </option>
-                                                                    <option
-                                                                        value="3" {{ $data->production_status == 3 ? 'selected' : '' }}>
-                                                                        Sold
-                                                                    </option>
+                                                                <label for="production_status" class="form-label">Production Status</label>
+                                                                <select name="production_status" class="form-select prodcution_status_select" required>
+                                                                    <option value="1" {{ $data->production_status == 1 ? 'selected' : '' }}>Production Process Done</option>
+                                                                    <option value="2" {{ $data->production_status == 2 ? 'selected' : '' }}>Send To Warehouse</option>
+                                                                    <option value="3" {{ $data->production_status == 3 ? 'selected' : '' }}>Sales Initiated</option>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                         <div class="col-12 warehouse_select_container">
                                                             <div class="mb-3">
-                                                                <label for="warehouse_id"
-                                                                       class="form-label">Warehouse</label>
+                                                                <label for="warehouse_id" class="form-label">Warehouse</label>
                                                                 <select name="warehouse_id" class="form-select">
-                                                                    <option selected>Select Warehouse</option>
+                                                                    <option value="">Select Warehouse</option>
                                                                     @foreach($wareHouses as $wareHousesData)
-                                                                        <option
-                                                                            value="{{$wareHousesData->id}}" {{ $wareHousesData->warehouse_id == $wareHousesData->id ? 'selected' : '' }}>{{$wareHousesData->name}}</option>
+                                                                        <option value="{{ $wareHousesData->id }}" {{ $wareHousesData->warehouse_id == $wareHousesData->id ? 'selected' : '' }}>{{ $wareHousesData->name }}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
+                                                        <div class="col-12 sold_select_container">
+                                                            <div class="mb-3">
+                                                                <label for="customer_id" class="form-label">Customer</label>
+                                                                <select name="customer_id" class="form-select">
+                                                                    <option value="">Select Customer</option>
+                                                                    @foreach($customers as $customersData)
+                                                                        <option value="{{ $customersData->id }}" {{ $customersData->customer_id == $customersData->id ? 'selected' : '' }}>{{ $customersData->name }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 sold_select_container">
+                                                            <div class="mb-3">
+                                                                <label for="unit_price" class="form-label">Unit Price</label>
+                                                                <input type="number" name="unit_price" value="{{ $data->unit_price }}" class="form-control" readonly>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 sold_select_container">
+                                                            <div class="mb-3">
+                                                                <label for="available_qty" class="form-label">Available Qty</label>
+                                                                <input type="number" name="available_qty" value="{{ $data->available_qty }}" class="form-control available_qty" readonly>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 sold_select_container">
+                                                            <div class="mb-3">
+                                                                <label for="sell_qty" class="form-label">Sell Qty</label>
+                                                                <input type="number" name="sell_qty" id="sell_qty" class="form-control sell_qty" placeholder="Enter Sell Qty">
+                                                            </div>
+                                                        </div>
                                                         <div class="d-flex justify-content-end">
-                                                            <button class="btn btn-primary" type="submit">Update
-                                                            </button>
+                                                            <button class="btn btn-primary" type="submit">Update</button>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -169,7 +183,10 @@
                                                                         required>
                                                                     @foreach($productDesigns as $productDesignsData)
                                                                         <option
-                                                                            value="{{$productDesignsData->id}}" {{ $productDesignsData->production_design_id == $productDesignsData->id ? 'selected' : '' }}>{{$productDesignsData->product_name}}</option>
+                                                                            value="{{$productDesignsData->id}}" {{ $productDesignsData->production_design_id == $productDesignsData->id ? 'selected' : '' }}>{{$productDesignsData->product_name}}
+                                                                            ({{$productDesignsData->productCategory->name}}
+                                                                            )
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -290,7 +307,9 @@
                                         <option selected>Select Product Design</option>
                                         @foreach($productDesigns as $productDesignsData)
                                             <option
-                                                value="{{$productDesignsData->id}}">{{$productDesignsData->product_name}}</option>
+                                                value="{{$productDesignsData->id}}">{{$productDesignsData->product_name}}
+                                                ({{$productDesignsData->productCategory->name}})
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -310,7 +329,7 @@
                                 <div class="mb-3">
                                     <label for="example-select" class="form-label">Brand Name</label>
                                     <select name="brand_id" class="form-select">
-                                        <option selected>Select Batch No</option>
+                                        <option selected>Select Brand</option>
                                         @foreach($brands as $brandsData)
                                             <option value="{{$brandsData->id}}">{{$brandsData->name}}</option>
                                         @endforeach
@@ -320,14 +339,14 @@
                             <div class="col-12">
                                 <div class="mb-3">
                                     <label for="unit_price" class="form-label">Unit Price</label>
-                                    <input type="text" id="unit_price" name="unit_price"
+                                    <input type="number" id="unit_price" name="unit_price"
                                            class="form-control" placeholder="Enter Unit Price" required>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="mb-3">
                                     <label for="production_qty" class="form-label">Product Qty</label>
-                                    <input type="text" id="production_qty" name="production_qty"
+                                    <input type="number" id="production_qty" name="production_qty"
                                            class="form-control" placeholder="Enter Product Qty" required>
                                 </div>
                             </div>
@@ -341,27 +360,51 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.sell_qty').on('input', function () {
+                const availableQty = parseFloat($('.available_qty').val()) || 0;
+                const sellQty = parseFloat($(this).val()) || 0;
+                if (sellQty > availableQty) {
+                    alert('Sell Qty cannot be greater than Available Qty!');
+                    $(this).val('');
+                } else if (sellQty < 0) {
+                    alert('Sell Qty cannot be negative!');
+                    $(this).val('');
+                }
+            });
+        });
+    </script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const statusSelects = document.querySelectorAll('.prodcution_status_select');
-            statusSelects.forEach(function (select) {
-                select.addEventListener('change', function () {
-                    const container = select.closest('.row').querySelector('.warehouse_select_container');
-                    if (select.value === '2') {
+            const productionStatusSelect = document.querySelector('.prodcution_status_select');
+            const warehouseContainer = document.querySelector('.warehouse_select_container');
+            const soldContainers = document.querySelectorAll('.sold_select_container');
+
+            function updateFormVisibility() {
+                const selectedValue = productionStatusSelect.value;
+
+                if (selectedValue == '2') {
+                    warehouseContainer.style.display = 'block';
+                } else {
+                    warehouseContainer.style.display = 'none';
+                }
+
+                soldContainers.forEach(container => {
+                    if (selectedValue == '3') {
                         container.style.display = 'block';
                     } else {
                         container.style.display = 'none';
                     }
                 });
+            }
 
-                const container = select.closest('.row').querySelector('.warehouse_select_container');
-                if (select.value === '2') {
-                    container.style.display = 'block';
-                } else {
-                    container.style.display = 'none';
-                }
-            });
+            productionStatusSelect.addEventListener('change', updateFormVisibility);
+            updateFormVisibility();
         });
+
     </script>
 
 @endsection

@@ -5,10 +5,12 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Batch;
 use App\Models\Brand;
+use App\Models\Customer;
 use App\Models\ProductDesign;
 use App\Models\ProductDesignUseRawMaterial;
 use App\Models\Production;
 use App\Models\RawMaterial;
+use App\Models\SellProduction;
 use App\Models\WareHouse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -26,15 +28,17 @@ class ProductionController extends Controller
             return $next($request);
         })->only('index');
     }
+
     public function index()
     {
-        $productions = Production::latest()->get();
+        $productions = Production::where('available_qty', '!=', 0)->latest()->get();
         $productDesigns = ProductDesign::latest()->get();
         $batches = Batch::where('is_completed', 0)->get();
         $brands = Brand::latest()->get();
         $wareHouses = WareHouse::latest()->get();
+        $customers = Customer::latest()->get();
         return view('admin.pages.production.index', compact('productions', 'productDesigns', 'batches',
-            'brands', 'wareHouses'));
+            'brands', 'wareHouses', 'customers'));
     }
 
     public function store(Request $request)
@@ -52,6 +56,7 @@ class ProductionController extends Controller
             $productions->brand_id = $request->brand_id;
             $productions->unit_price = $request->unit_price;
             $productions->production_qty = $request->production_qty;
+            $productions->available_qty = $request->production_qty;
             $productions->production_status = 1;
             $productions->save();
 
@@ -75,15 +80,43 @@ class ProductionController extends Controller
             ]);
             $productions = Production::find($id);
             $productions->production_status = $request->production_status;
-            if($request->production_status == 2){
+
+            if ($request->production_status == 2) {
                 $productions->warehouse_id = $request->warehouse_id;
                 $wareHouse = WareHouse::find($request->warehouse_id);
                 $wareHouse->is_already_booked = 1;
                 $wareHouse->save();
-            }else{
-                $productions->warehouse_id = 0;
+            } else if ($request->production_status == 3) {
+                $productions->sell_qty += $request->sell_qty;
+                $productions->available_qty = $request->available_qty - $request->sell_qty;
+
+                if ($request->available_qty < $request->sell_qty) {
+                    return redirect()->back()->with('error', 'Sell Quantity is greater than Production Quantity');
+                }
+
+                $sellProduction = new SellProduction();
+                $sellProduction->production_id = $productions->id;
+                $sellProduction->customer_id = $request->customer_id;
+                $sellProduction->sell_qty = $productions->sell_qty;
+                $sellProduction->sell_date = date('Y-m-d');
+                $sellProduction->unit_price = $productions->unit_price;
+                $sellProduction->save();
+
+                if ($productions->available_qty == 0) {
+                    $wareHouse = WareHouse::find($productions->warehouse_id);
+                    if ($wareHouse) {
+                        $wareHouse->is_already_booked = 0;
+                        $wareHouse->save();
+                    }
+                    $productions->warehouse_id = null;
+                    $productions->save();
+                }
             }
+
+
             $productions->save();
+
+
             Toastr::success('Production Added Successfully', 'Success');
             return redirect()->back();
         } catch (\Exception $e) {
