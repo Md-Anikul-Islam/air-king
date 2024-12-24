@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('sell_qty');
             $table->date('sell_date');
             $table->decimal('unit_price', 10, 2);
+            $table->string('invoice_no');
             $table->timestamps();
         });
     }

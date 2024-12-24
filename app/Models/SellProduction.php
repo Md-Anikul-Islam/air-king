@@ -14,6 +14,7 @@ class SellProduction extends Model
         'sell_qty',
         'sell_date',
         'unit_price',
+        'invoice_no',
     ];
 
     public function production()

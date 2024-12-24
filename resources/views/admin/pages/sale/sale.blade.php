@@ -91,7 +91,7 @@
                             <td>{{$data->sell_date}}</td>
                             <td style="width: 100px;">
                                 <div class="d-flex">
-                                    Invoice
+                                    <a href="{{ route('invoice', $data->id) }}">Invoice</a>
                                 </div>
                             </td>
                         </tr>

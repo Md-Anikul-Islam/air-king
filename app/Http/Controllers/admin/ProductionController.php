@@ -101,6 +101,7 @@ class ProductionController extends Controller
                 $sellProduction->sell_qty = $request->sell_qty;
                 $sellProduction->sell_date = $request->sell_date;
                 $sellProduction->unit_price = $productions->unit_price;
+                $sellProduction->invoice_no = 'INV-' . $sellProduction->id . '-' . time();
                 $sellProduction->save();
 
                 if ($productions->available_qty == 0) {

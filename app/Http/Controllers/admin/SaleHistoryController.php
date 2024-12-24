@@ -60,5 +60,11 @@ class SaleHistoryController extends Controller
         return view('admin.pages.sale.sale', compact('sale', 'customers', 'products', 'totalAmount', 'defaultTotalAmount'));
     }
 
+    public function invoice($id)
+    {
+        $sale = SellProduction::find($id);
+        return view('admin.pages.sale.invoice', compact('sale'));
+    }
+
 
 }

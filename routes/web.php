@@ -151,6 +151,8 @@ Route::middleware('auth')->group(callback: function () {
 
     //sell History
     Route::get('/sale-history', [SaleHistoryController::class, 'saleHistory'])->name('sale.history');
+    Route::get('/sale-history/invoice/{id}', [SaleHistoryController::class, 'invoice'])->name('invoice');
+
 
 
     //Role and User Section
