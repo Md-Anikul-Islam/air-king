@@ -92,9 +92,11 @@
                             <td>{{$data->production->unit_price * $data->sell_qty}}</td>
                             <td>{{$data->sell_date}}</td>
                             <td style="width: 100px;">
-                                <div class="d-flex">
-                                    <a href="{{ route('invoice', $data->id) }}">Invoice</a>
+                                <div class="d-flex gap-1">
+                                    <a href="{{route('sale.history.invoice', $data->id)}}" class="btn btn-info">Generate Invoice</a>
+                                    <a href="{{ route('sale.details', $data->id) }}" class="btn btn-primary">Details</a>
                                 </div>
+
                             </td>
                         </tr>
                     @endforeach

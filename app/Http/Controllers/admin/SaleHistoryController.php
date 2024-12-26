@@ -5,18 +5,13 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Production;
+use App\Models\SellHistory;
 use App\Models\SellProduction;
 use Illuminate\Http\Request;
 
 class SaleHistoryController extends Controller
 {
-//    public function saleHistory()
-//    {
-//        $sale = SellProduction::with('production.product_design', 'customer')->latest()->get();
-//        $customer = Customer::latest()->get();
-//        $production = Production::with('product_design')->latest()->get();
-//        return view('admin.pages.sale.sale', compact('sale', 'customer', 'production'));
-//    }
+
     public function saleHistory(Request $request)
     {
         // Retrieve all customers and products for the filters
@@ -62,9 +57,12 @@ class SaleHistoryController extends Controller
 
     public function invoice($id)
     {
-        $sale = SellProduction::find($id);
+        $sale = SellProduction::where('id', $id)->with('customer','production','sellHistory')->get();
         return view('admin.pages.sale.invoice', compact('sale'));
     }
+
+
+
 
 
 }

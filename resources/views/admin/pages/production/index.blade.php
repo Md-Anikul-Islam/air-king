@@ -64,7 +64,7 @@
                                     <div class="d-flex justify-content-end gap-1 text-nowrap">
                                         @can('production-section-edit')
                                             <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
-                                                    data-bs-target="#changeStatusModal{{$data->id}}">Sell From Warehouse
+                                                    data-bs-target="#changeStatusModal{{$data->id}}">From Warehouse
                                             </button>
                                         @endcan
                                         @can('production-section-edit')
@@ -182,6 +182,22 @@
                                                                 <input type="number" name="sell_qty" id="sell_qty"
                                                                        class="form-control sell_qty"
                                                                        placeholder="Enter Sell Qty">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 sold_select_container">
+                                                            <div class="mb-3">
+                                                                <label for="total_cost" class="form-label">Total Cost</label>
+                                                                <input type="number" name="total_cost" id="total_cost"
+                                                                       class="form-control total_cost"
+                                                                       disabled>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 sold_select_container">
+                                                            <div class="mb-3">
+                                                                <label for="payment" class="form-label">Payment</label>
+                                                                <input type="number" name="payment" id="payment"
+                                                                       class="form-control payment"
+                                                                       placeholder="Enter Payment">
                                                             </div>
                                                         </div>
                                                         <div class="d-flex justify-content-end">
@@ -473,6 +489,17 @@
                 document.getElementById('raw-material-fields-' + selectedId).style.display = 'block';
             }
         });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $(".sell_qty").on("input", function () {
+                const unitPrice = parseFloat($("[name='unit_price']").val()) || 0;
+                const sellQty = parseFloat($(this).val()) || 0;
+                $(".total_cost").val(unitPrice * sellQty);
+            });
+        });
+
     </script>
 
     <script>

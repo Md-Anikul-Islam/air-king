@@ -23,6 +23,7 @@ use App\Http\Controllers\admin\ExpenseController;
 use App\Http\Controllers\admin\ExpenseTypeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\admin\SellHistoryDetailsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -151,9 +152,11 @@ Route::middleware('auth')->group(callback: function () {
 
     //sell History
     Route::get('/sale-history', [SaleHistoryController::class, 'saleHistory'])->name('sale.history');
-    Route::get('/sale-history/invoice/{id}', [SaleHistoryController::class, 'invoice'])->name('invoice');
+    Route::get('/sale-invoice/{id}', [SaleHistoryController::class, 'invoice'])->name('sale.history.invoice');
 
-
+    //sell History Details
+    Route::get('/sale/details/{id}', [SellHistoryDetailsController::class, 'index'])->name('sale.details');
+    Route::post('/sale-details-store', [SellHistoryDetailsController::class, 'store'])->name('sale.details.store');
 
     //Role and User Section
     Route::resource('roles', RoleController::class);

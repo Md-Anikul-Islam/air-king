@@ -27,4 +27,9 @@ class SellProduction extends Model
         return $this->belongsTo(Customer::class, 'customer_id');
     }
 
+    public function sellHistory()
+    {
+        return $this->hasMany(SellHistory::class, 'sell_production_id', 'id');
+    }
+
 }

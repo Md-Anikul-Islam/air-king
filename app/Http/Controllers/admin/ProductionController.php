@@ -10,6 +10,7 @@ use App\Models\ProductDesign;
 use App\Models\ProductDesignUseRawMaterial;
 use App\Models\Production;
 use App\Models\RawMaterial;
+use App\Models\SellHistory;
 use App\Models\SellProduction;
 use App\Models\WareHouse;
 use Illuminate\Http\Request;
@@ -91,11 +92,15 @@ class ProductionController extends Controller
                 $wareHouse->save();
             } else if ($request->production_status == 3) {
                 $productions->sell_qty += $request->sell_qty;
-                $productions->available_qty = $request->available_qty - $request->sell_qty;
-
-                if ($request->available_qty < $request->sell_qty) {
-                    return redirect()->back()->with('error', 'Sell Quantity is greater than Production Quantity');
+                if ($productions->available_qty < $request->sell_qty) {
+                    return redirect()->back()->with('error', 'Sell Quantity is greater than Available Quantity');
                 }
+
+                $productions->available_qty = $productions->available_qty - $request->sell_qty;
+
+                //($productions->available_qty);
+
+
 
                 $sellProduction = new SellProduction();
                 $sellProduction->production_id = $productions->id;
@@ -105,6 +110,14 @@ class ProductionController extends Controller
                 $sellProduction->unit_price = $productions->unit_price;
                 $sellProduction->invoice_no = 'INV-' . $sellProduction->id . '-' . time();
                 $sellProduction->save();
+
+                $sellHistory = new SellHistory();
+                $sellHistory->sell_production_id = $sellProduction->id;
+                $sellHistory->payment = $request->payment;
+                $sellHistory->due = $request->sell_qty * $productions->unit_price - $request->payment;
+                $sellHistory->save();
+
+
 
                 if ($productions->available_qty == 0) {
                     $wareHouse = WareHouse::find($productions->warehouse_id);

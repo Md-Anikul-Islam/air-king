@@ -35,18 +35,23 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="float-end mt-3">
-                                <p><b>Hello, {{$sale->customer->name}}</b></p>
+                                <p><b>Hello, {{$sale->sellProdution->customer->name}}</b></p>
                                 <p class="text-muted fs-13">
-                                    Please review your invoice carefully and ensure all details are correct. If you have any questions or notice any discrepancies, do not hesitate to contact us.
+                                    Please review your invoice carefully and ensure all details are correct. If you have
+                                    any questions or notice any discrepancies, do not hesitate to contact us.
                                 </p>
                             </div>
 
                         </div>
                         <div class="col-sm-4 offset-sm-2">
                             <div class="mt-3 float-sm-end">
-                                <p class="fs-13"><strong>Order Date: </strong> &nbsp;&nbsp;&nbsp; {{  Carbon\Carbon::parse($sale->created_at)->format('d M Y') }}</p>
-                                <p class="fs-13"><strong>Order Status: </strong> <span class="badge bg-success float-end">Paid</span></p>
-                                <p class="fs-13"><strong>Invoice : </strong> <span class="float-end">#{{$sale->invoice_no}}</span></p>
+                                <p class="fs-13"><strong>Order Date: </strong>
+                                    &nbsp;&nbsp;&nbsp; {{  Carbon\Carbon::parse($sale->created_at)->format('d M Y') }}
+                                </p>
+                                <p class="fs-13"><strong>Order Status: </strong> <span
+                                        class="badge bg-success float-end">Paid</span></p>
+                                <p class="fs-13"><strong>Invoice : </strong> <span
+                                        class="float-end">#{{$sale->invoice_no}}</span></p>
                             </div>
                         </div>
                     </div>
@@ -67,20 +72,35 @@
                                 <table class="table table-sm table-centered table-hover table-borderless mb-0 mt-3">
                                     <thead class="border-top border-bottom bg-light-subtle border-light">
                                     <tr>
-                                        <th>Item</th>
-                                        <th>Quantity</th>
+                                        <th>#</th>
+                                        <th>Batch</th>
+                                        <th>Product</th>
                                         <th>Unit Cost</th>
-                                        <th class="text-end">Total</th>
-                                    </tr></thead>
+                                        <th>Sale Qty</th>
+                                        <th>Paid</th>
+                                        <th>Due</th>
+                                    </tr>
+                                    </thead>
                                     <tbody>
+                                    @foreach($sale as $index => $item)
                                         <tr>
-                                            <td>
-                                                {{ $sale->production->product_design->product_name }} ({{ $sale->production->product_design->productCategory->name }})
-                                            </td>
-                                            <td>{{$sale->sell_qty}}</td>
-                                            <td>{{$sale->unit_price}}</td>
-                                            <td class="text-end">{{$sale->unit_price * $sale->sell_qty}}</td>
+                                            <td class="">{{ $index + 1 }}</td>
+                                            @if($index == 0)
+                                                <td>{{$item->production->batch->batch_no}}</td>
+                                                <td>{{$item->production->product_design->product_name}}</td>
+                                                <td>{{$item->production->unit_price}}</td>
+                                                <td>{{$item->sell_qty}}</td>
+                                            @else
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            @endif
+                                            <td>{{$item->paid}}</td>
+                                            <td>{{$item->due}}</td>
                                         </tr>
+                                    @endforeach
+
                                     </tbody>
                                 </table>
                             </div>
@@ -99,10 +119,18 @@
                                 </small>
                             </div>
                         </div>
+                        {{--                        <div class="col-sm-6">--}}
+                        {{--                            <div class="float-end mt-3 mt-sm-0">--}}
+                        {{--                                <p><b>Sub-total:</b> <span class="float-end">{{$sale->total - $sale->delivery_charge}}Tk</span></p>--}}
+                        {{--                                <h3>{{$sale->total}}Tk</h3>--}}
+                        {{--                            </div>--}}
+                        {{--                            <div class="clearfix"></div>--}}
+                        {{--                        </div>--}}
                     </div>
                     <div class="d-print-none mt-4">
                         <div class="text-center">
-                            <a href="javascript:window.print()" class="btn btn-primary"><i class="ri-printer-line"></i> Download</a>
+                            <a href="javascript:window.print()" class="btn btn-primary"><i class="ri-printer-line"></i>
+                                Print</a>
                         </div>
                     </div>
                 </div>
