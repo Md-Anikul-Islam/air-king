@@ -38,8 +38,10 @@ class ProductionController extends Controller
         $brands = Brand::latest()->get();
         $wareHouses = WareHouse::latest()->get();
         $customers = Customer::latest()->get();
+        $productDesignRawMaterials = ProductDesignUseRawMaterial::latest()->get();
+        $rawMaterials = RawMaterial::latest()->get();
         return view('admin.pages.production.index', compact('productions', 'productDesigns', 'availableBatches', 'batches',
-            'brands', 'wareHouses', 'customers'));
+            'brands', 'wareHouses', 'customers', 'productDesignRawMaterials', 'rawMaterials'));
     }
 
     public function store(Request $request)
