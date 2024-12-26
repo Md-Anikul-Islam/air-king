@@ -58,6 +58,7 @@ class SaleHistoryController extends Controller
     public function invoice($id)
     {
         $sale = SellProduction::where('id', $id)->with('customer','production','sellHistory')->get();
+        dd($sale);
         return view('admin.pages.sale.invoice', compact('sale'));
     }
 
