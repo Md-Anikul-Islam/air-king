@@ -163,7 +163,7 @@
                                                                     Price</label>
                                                                 <input type="number" name="unit_price"
                                                                        value="{{ $data->unit_price }}"
-                                                                       class="form-control" readonly>
+                                                                       class="form-control" disabled>
                                                             </div>
                                                         </div>
                                                         <div class="col-6 sold_select_container">
@@ -172,7 +172,7 @@
                                                                     Qty</label>
                                                                 <input type="number" name="available_qty"
                                                                        value="{{ $data->available_qty }}"
-                                                                       class="form-control available_qty" readonly>
+                                                                       class="form-control available_qty" disabled>
                                                             </div>
                                                         </div>
                                                         <div class="col-12 sold_select_container">
@@ -370,27 +370,27 @@
                                                 <label class="form-label">Raw Material</label>
                                                 <input type="text" name="raw_material_name[]" class="form-control"
                                                        value="{{ $rawMaterial->rawMaterial->raw_material_name }}"
-                                                       readonly>
+                                                       disabled>
                                             </div>
 
                                             <div class="col-3">
                                                 <label class="form-label">Quantity</label>
                                                 <input type="number" name="quantity[]" class="form-control"
                                                        placeholder="Enter Quantity" value="{{ $rawMaterial->quantity }}"
-                                                       readonly>
+                                                       disabled>
                                             </div>
 
                                             <div class="col-3">
                                                 <label class="form-label">Unit Price</label>
                                                 <input type="number" name="per_unit_price" class="form-control"
                                                        value="{{ $rawMaterial->per_unit_price }}"
-                                                       readonly>
+                                                       disabled>
                                             </div>
                                             <div class="col-3">
                                                 <label class="form-label">Total Price</label>
                                                 <input type="number" class="form-control"
                                                        value="{{ $rawMaterial->per_unit_price * $rawMaterial->quantity }}"
-                                                       readonly>
+                                                       disabled>
                                             </div>
                                         </div>
                                         @php
@@ -403,7 +403,7 @@
                                                 Price</label>
                                             <input type="number" id="raw_material_price" name="raw_material_price"
                                                    value="{{ $totalPrice }}"
-                                                   class="form-control" readonly>
+                                                   class="form-control" disabled>
                                         </div>
                                     </div>
                                 </div>
