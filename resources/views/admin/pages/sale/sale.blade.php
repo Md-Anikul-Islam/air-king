@@ -32,7 +32,7 @@
                     <option value="">Select Product</option>
                     @foreach($products as $product)
                         <option value="{{ $product->id }}" {{ request('production_id') == $product->id ? 'selected' : '' }}>
-                            {{ $product->product_design->product_name }}
+                            {{ $product->product_design->product_name }} - {{ $product->batch->batch_no }}
                         </option>
                     @endforeach
                 </select>
@@ -71,6 +71,7 @@
                     <tr>
                         <th>S/N</th>
                         <th>Customer Name</th>
+                        <th>Batch</th>
                         <th>Product</th>
                         <th>Unit Cost</th>
                         <th>Sale Qty</th>
@@ -84,6 +85,7 @@
                         <tr>
                             <td>{{$key+1}}</td>
                             <td>{{$data->customer->name}}</td>
+                            <td>{{$data->production->batch->batch_no}}</td>
                             <td>{{$data->production->product_design->product_name}}</td>
                             <td>{{$data->production->unit_price}}</td>
                             <td>{{$data->sell_qty}}</td>

@@ -21,7 +21,7 @@ class SaleHistoryController extends Controller
     {
         // Retrieve all customers and products for the filters
         $customers = Customer::latest()->get();
-        $products = Production::with('product_design')->latest()->get();
+        $products = Production::with('product_design','batch')->latest()->get();
 
         // Start building the query
         $saleQuery = SellProduction::with('production.product_design', 'customer');
