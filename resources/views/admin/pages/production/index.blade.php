@@ -50,7 +50,9 @@
                         @foreach ($productions as $key => $data)
                             <tr>
                                 <td scope="row">{{ ++$key }}</td>
-                                <td>{{ $data->product_design->product_name }} ({{ $data->product_design->productCategory->name }})</td>
+                                <td>{{ $data->product_design->product_name }}
+                                    ({{ $data->product_design->productCategory->name }})
+                                </td>
                                 <td>{{ $data->batch->batch_no }}</td>
                                 <td>{{ $data->brand->name }}</td>
                                 <td>{{ $data->unit_price }}</td>
@@ -87,73 +89,104 @@
                                     <div class="modal-dialog  modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title" id="changeStatusModalLabel{{$data->id}}">Selling Product</h4>
+                                                <h4 class="modal-title" id="changeStatusModalLabel{{$data->id}}">Selling
+                                                    Product</h4>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form method="post" action="{{ route('production.change_status', $data->id) }}" enctype="multipart/form-data">
+                                                <form method="post"
+                                                      action="{{ route('production.change_status', $data->id) }}"
+                                                      enctype="multipart/form-data">
                                                     @csrf
                                                     @method('PUT')
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <div class="mb-3">
-                                                                <label for="production_status" class="form-label">Production Status</label>
-                                                                <select name="production_status" class="form-select prodcution_status_select" required>
-                                                                    <option value="1" {{ $data->production_status == 1 ? 'selected' : '' }}>Production Process Done</option>
-                                                                    <option value="2" {{ $data->production_status == 2 ? 'selected' : '' }}>Send To Warehouse</option>
-                                                                    <option value="3" {{ $data->production_status == 3 ? 'selected' : '' }}>Sales Initiated</option>
+                                                                <label for="production_status" class="form-label">Production
+                                                                    Status</label>
+                                                                <select name="production_status"
+                                                                        class="form-select prodcution_status_select"
+                                                                        required>
+                                                                    <option
+                                                                        value="1" {{ $data->production_status == 1 ? 'selected' : '' }}>
+                                                                        Production Process Done
+                                                                    </option>
+                                                                    <option
+                                                                        value="2" {{ $data->production_status == 2 ? 'selected' : '' }}>
+                                                                        Send To Warehouse
+                                                                    </option>
+                                                                    <option
+                                                                        value="3" {{ $data->production_status == 3 ? 'selected' : '' }}>
+                                                                        Sales Initiated
+                                                                    </option>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                         <div class="col-12 warehouse_select_container">
                                                             <div class="mb-3">
-                                                                <label for="warehouse_id" class="form-label">Warehouse</label>
+                                                                <label for="warehouse_id"
+                                                                       class="form-label">Warehouse</label>
                                                                 <select name="warehouse_id" class="form-select">
                                                                     <option value="">Select Warehouse</option>
                                                                     @foreach($wareHouses as $wareHousesData)
-                                                                        <option value="{{ $wareHousesData->id }}" {{ $wareHousesData->warehouse_id == $wareHousesData->id ? 'selected' : '' }}>{{ $wareHousesData->name }}</option>
+                                                                        <option
+                                                                            value="{{ $wareHousesData->id }}" {{ $wareHousesData->warehouse_id == $wareHousesData->id ? 'selected' : '' }}>{{ $wareHousesData->name }}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
                                                         <div class="col-12 sold_select_container">
                                                             <div class="mb-3">
-                                                                <label for="customer_id" class="form-label">Customer</label>
+                                                                <label for="customer_id"
+                                                                       class="form-label">Customer</label>
                                                                 <select name="customer_id" class="form-select">
                                                                     <option value="">Select Customer</option>
                                                                     @foreach($customers as $customersData)
-                                                                        <option value="{{ $customersData->id }}" {{ $customersData->customer_id == $customersData->id ? 'selected' : '' }}>{{ $customersData->name }}</option>
+                                                                        <option
+                                                                            value="{{ $customersData->id }}" {{ $customersData->customer_id == $customersData->id ? 'selected' : '' }}>{{ $customersData->name }}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
                                                         <div class="col-12 sold_select_container">
                                                             <div class="mb-3">
-                                                                <label for="sell_date" class="form-label">Sell date</label>
-                                                                <input type="date" id="sell_date" name="sell_date" class="form-control">
+                                                                <label for="sell_date" class="form-label">Sell
+                                                                    date</label>
+                                                                <input type="date" id="sell_date" name="sell_date"
+                                                                       class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="col-6 sold_select_container">
                                                             <div class="mb-3">
-                                                                <label for="unit_price" class="form-label">Unit Price</label>
-                                                                <input type="number" name="unit_price" value="{{ $data->unit_price }}" class="form-control" readonly>
+                                                                <label for="unit_price" class="form-label">Unit
+                                                                    Price</label>
+                                                                <input type="number" name="unit_price"
+                                                                       value="{{ $data->unit_price }}"
+                                                                       class="form-control" readonly>
                                                             </div>
                                                         </div>
                                                         <div class="col-6 sold_select_container">
                                                             <div class="mb-3">
-                                                                <label for="available_qty" class="form-label">Available Qty</label>
-                                                                <input type="number" name="available_qty" value="{{ $data->available_qty }}" class="form-control available_qty" readonly>
+                                                                <label for="available_qty" class="form-label">Available
+                                                                    Qty</label>
+                                                                <input type="number" name="available_qty"
+                                                                       value="{{ $data->available_qty }}"
+                                                                       class="form-control available_qty" readonly>
                                                             </div>
                                                         </div>
                                                         <div class="col-12 sold_select_container">
                                                             <div class="mb-3">
-                                                                <label for="sell_qty" class="form-label">Sell Qty</label>
-                                                                <input type="number" name="sell_qty" id="sell_qty" class="form-control sell_qty" placeholder="Enter Sell Qty">
+                                                                <label for="sell_qty" class="form-label">Sell
+                                                                    Qty</label>
+                                                                <input type="number" name="sell_qty" id="sell_qty"
+                                                                       class="form-control sell_qty"
+                                                                       placeholder="Enter Sell Qty">
                                                             </div>
                                                         </div>
                                                         <div class="d-flex justify-content-end">
-                                                            <button class="btn btn-primary" type="submit">Update</button>
+                                                            <button class="btn btn-primary" type="submit">Update
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -296,7 +329,7 @@
     <!--------------------- Add New Modal ----------------------------->
     <div class="modal fade" id="addNewModalId" data-bs-backdrop="static" tabindex="-1" role="dialog"
          aria-labelledby="addNewModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content modal-lg">
                 <div class="modal-header">
                     <h4 class="modal-title" id="addNewModalLabel">Add</h4>
@@ -309,7 +342,7 @@
                             <div class="col-12">
                                 <div class="mb-3">
                                     <label for="example-select" class="form-label">Product Design</label>
-                                    <select name="production_design_id" class="form-select">
+                                    <select name="production_design_id" class="form-select" id="product-design-select">
                                         <option selected>Select Product Design</option>
                                         @foreach($productDesigns as $productDesignsData)
                                             <option
@@ -321,13 +354,61 @@
                                 </div>
                             </div>
 
-                            <div class="col-12">
-                                <div class="mb-3">
-                                    <label for="raw_material_price" class="form-label">Raw Material Price</label>
-                                    <input type="number" id="raw_material_price" name="raw_material_price"
-                                           class="form-control" readonly>
+                            @foreach($productDesigns as $productDesignsData)
+                                @php
+                                    $totalPrice = 0;
+                                @endphp
+                                <input type="hidden" name="raw_materials_json"
+                                       id="raw-materials-json-{{$productDesignsData->id}}"
+                                       value="{{ json_encode($productDesignsData->rawMaterials->pluck('raw_material_id', 'quantity')->toArray()) }}">
+
+                                <div id="raw-material-fields-{{$productDesignsData->id}}" class="raw-material-fields"
+                                     style="display: none;">
+                                    @foreach($productDesignsData->rawMaterials as $rawMaterial)
+                                        <div class="row raw-material-field mb-3">
+                                            <div class="col-3">
+                                                <label class="form-label">Raw Material</label>
+                                                <input type="text" name="raw_material_name[]" class="form-control"
+                                                       value="{{ $rawMaterial->rawMaterial->raw_material_name }}"
+                                                       readonly>
+                                            </div>
+
+                                            <div class="col-3">
+                                                <label class="form-label">Quantity</label>
+                                                <input type="number" name="quantity[]" class="form-control"
+                                                       placeholder="Enter Quantity" value="{{ $rawMaterial->quantity }}"
+                                                       readonly>
+                                            </div>
+
+                                            <div class="col-3">
+                                                <label class="form-label">Unit Price</label>
+                                                <input type="number" name="per_unit_price" class="form-control"
+                                                       value="{{ $rawMaterial->per_unit_price }}"
+                                                       readonly>
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="form-label">Total Price</label>
+                                                <input type="number" class="form-control"
+                                                       value="{{ $rawMaterial->per_unit_price * $rawMaterial->quantity }}"
+                                                       readonly>
+                                            </div>
+                                        </div>
+                                        @php
+                                            $totalPrice += $rawMaterial->per_unit_price * $rawMaterial->quantity;
+                                        @endphp
+                                    @endforeach
+                                    <div class="col-12" id="raw-material-price-container">
+                                        <div class="mb-3">
+                                            <label for="raw_material_price" class="form-label">Raw Material
+                                                Price</label>
+                                            <input type="number" id="raw_material_price" name="raw_material_price"
+                                                   value="{{ $totalPrice }}"
+                                                   class="form-control" readonly>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            @endforeach
+
 
                             <div class="col-12">
                                 <div class="mb-3">
@@ -335,11 +416,13 @@
                                     <select name="batch_id" class="form-select">
                                         <option selected>Select Batch No</option>
                                         @foreach($availableBatches as $availableBatchesData)
-                                            <option value="{{$availableBatchesData->id}}">{{$availableBatchesData->batch_no}}</option>
+                                            <option
+                                                value="{{$availableBatchesData->id}}">{{$availableBatchesData->batch_no}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
+
                             <div class="col-12">
                                 <div class="mb-3">
                                     <label for="example-select" class="form-label">Brand Name</label>
@@ -351,6 +434,7 @@
                                     </select>
                                 </div>
                             </div>
+
                             <div class="col-12">
                                 <div class="mb-3">
                                     <label for="unit_price" class="form-label">Unit Price</label>
@@ -358,6 +442,7 @@
                                            class="form-control" placeholder="Enter Unit Price" required>
                                 </div>
                             </div>
+
                             <div class="col-12">
                                 <div class="mb-3">
                                     <label for="production_qty" class="form-label">Product Qty</label>
@@ -365,6 +450,7 @@
                                            class="form-control" placeholder="Enter Product Qty" required>
                                 </div>
                             </div>
+
                             <div class="d-flex justify-content-end">
                                 <button class="btn btn-primary" type="submit">Submit</button>
                             </div>
@@ -376,6 +462,19 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        document.getElementById('product-design-select').addEventListener('change', function () {
+            const selectedId = this.value;
+            document.querySelectorAll('.raw-material-fields').forEach(function (element) {
+                element.style.display = 'none';
+            });
+            if (selectedId) {
+                document.getElementById('raw-material-fields-' + selectedId).style.display = 'block';
+            }
+        });
+    </script>
+
     <script>
         $(document).ready(function () {
             $('.sell_qty').on('input', function () {
@@ -427,7 +526,6 @@
         const today = new Date().toISOString().split('T')[0];
         sellDateInput.setAttribute('min', today);
     </script>
-
 
 @endsection
 
