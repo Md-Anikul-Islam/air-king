@@ -329,7 +329,7 @@
     <!--------------------- Add New Modal ----------------------------->
     <div class="modal fade" id="addNewModalId" data-bs-backdrop="static" tabindex="-1" role="dialog"
          aria-labelledby="addNewModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content modal-lg">
                 <div class="modal-header">
                     <h4 class="modal-title" id="addNewModalLabel">Add</h4>
