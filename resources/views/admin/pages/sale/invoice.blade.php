@@ -35,7 +35,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="float-end mt-3">
-                                <p><b>Hello, {{$sale->sellProdution->customer->name}}</b></p>
+                                <p><b>Hello, Md Anik</b></p>
                                 <p class="text-muted fs-13">
                                     Please review your invoice carefully and ensure all details are correct. If you have
                                     any questions or notice any discrepancies, do not hesitate to contact us.
@@ -60,8 +60,8 @@
                         <div class="col-6">
                             <h6 class="fs-14">Address</h6>
                             <address>
-                                {{$sale->customer->phone}}<br>
-                                {{$sale->customer->address}}
+                                01905256528<br>
+                               Dhaka
                             </address>
                         </div>
                     </div>
@@ -82,24 +82,19 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($sale as $index => $item)
+
                                         <tr>
-                                            <td class="">{{ $index + 1 }}</td>
-                                            @if($index == 0)
-                                                <td>{{$item->production->batch->batch_no}}</td>
-                                                <td>{{$item->production->product_design->product_name}}</td>
-                                                <td>{{$item->production->unit_price}}</td>
-                                                <td>{{$item->sell_qty}}</td>
-                                            @else
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            @endif
-                                            <td>{{$item->paid}}</td>
-                                            <td>{{$item->due}}</td>
+                                            <td class="">1</td>
+
+                                                <td>1</td>
+                                                <td>2</td>
+                                                <td>3</td>
+                                                <td>4</td>
+
+                                            <td>5</td>
+                                            <td>6</td>
                                         </tr>
-                                    @endforeach
+
 
                                     </tbody>
                                 </table>
@@ -119,13 +114,7 @@
                                 </small>
                             </div>
                         </div>
-                        {{--                        <div class="col-sm-6">--}}
-                        {{--                            <div class="float-end mt-3 mt-sm-0">--}}
-                        {{--                                <p><b>Sub-total:</b> <span class="float-end">{{$sale->total - $sale->delivery_charge}}Tk</span></p>--}}
-                        {{--                                <h3>{{$sale->total}}Tk</h3>--}}
-                        {{--                            </div>--}}
-                        {{--                            <div class="clearfix"></div>--}}
-                        {{--                        </div>--}}
+
                     </div>
                     <div class="d-print-none mt-4">
                         <div class="text-center">
