@@ -61,6 +61,18 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-xxl-3 col-sm-6">
+                <div class="card widget-flat text-bg-primary">
+                    <div class="card-body">
+                        <div class="float-end">
+                            <i class="ri-file-line widget-icon"></i>
+                        </div>
+                        <h6 class="text-uppercase mt-0" title="Customers">Total Sale</h6>
+                        <h2 class="my-2">{{$totalSaleAmount}}</h2>
+                    </div>
+                </div>
+            </div>
         </div>
         @endcan
 

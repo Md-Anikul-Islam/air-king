@@ -10,6 +10,7 @@ use App\Models\News;
 use App\Models\Production;
 use App\Models\Project;
 use App\Models\ProjectFile;
+use App\Models\SellProduction;
 use App\Models\Showcase;
 use App\Models\Supplier;
 use App\Models\Team;
@@ -21,12 +22,13 @@ class AdminDashboardController extends Controller
 {
     public function index()
     {
-        $loginLog = LoginLog::orderBy('last_login','desc')->get();
+         $loginLog = LoginLog::orderBy('last_login','desc')->get();
          $totalCustomer = Customer::count();
          $totalSupplier = Supplier::count();
          $totalEmployee = Employee::count();
          $totalProduction = Production::count();
-         return view('admin.dashboard', compact('loginLog','totalCustomer','totalSupplier','totalEmployee','totalProduction'));
+         $totalSaleAmount = SellProduction::sum(\DB::raw('sell_qty * unit_price'));
+         return view('admin.dashboard', compact('loginLog','totalCustomer','totalSupplier','totalEmployee','totalProduction','totalSaleAmount'));
     }
 
     public function unauthorized()
