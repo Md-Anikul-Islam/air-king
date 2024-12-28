@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\Production;
 use App\Models\SellHistory;
 use App\Models\SellProduction;
+use App\Models\SiteSetting;
 use Illuminate\Http\Request;
 
 class SaleHistoryController extends Controller
@@ -57,8 +58,10 @@ class SaleHistoryController extends Controller
 
     public function invoice($id)
     {
-        $sale = SellProduction::where('id', $id)->with('customer','production','sellHistory')->first();
-        return view('admin.pages.sale.invoice', compact('sale'));
+        $sale = SellProduction::where('id', $id)->with('customer','production','sellHistory.sellProductions.production.product_design')->first();
+        //dd($sale);
+        $siteSetting = SiteSetting::latest()->first();
+        return view('admin.pages.sale.invoice', compact('sale','siteSetting'));
     }
 
 

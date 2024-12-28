@@ -24,7 +24,7 @@
                     <!-- Invoice Logo-->
                     <div class="clearfix">
                         <div class="float-start mb-3">
-                            <img src="#" alt="dark logo" height="22">
+                            <img src="{{ asset($siteSetting->site_preview_image) }}" alt="dark logo" height="85">
                         </div>
                         <div class="float-end">
                             <h4 class="m-0 d-print-none">Invoice</h4>
@@ -35,7 +35,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="float-end mt-3">
-                                <p><b>Hello, Md Anik</b></p>
+                                <p><b>Hello, {{$sale->customer->name}}</b></p>
                                 <p class="text-muted fs-13">
                                     Please review your invoice carefully and ensure all details are correct. If you have
                                     any questions or notice any discrepancies, do not hesitate to contact us.
@@ -60,8 +60,8 @@
                         <div class="col-6">
                             <h6 class="fs-14">Address</h6>
                             <address>
-                                01905256528<br>
-                               Dhaka
+                                {{$sale->customer->phone}}<br>
+                                {{$sale->customer->address}}
                             </address>
                         </div>
                     </div>
@@ -73,27 +73,27 @@
                                     <thead class="border-top border-bottom bg-light-subtle border-light">
                                     <tr>
                                         <th>#</th>
-                                        <th>Batch</th>
                                         <th>Product</th>
                                         <th>Unit Cost</th>
                                         <th>Sale Qty</th>
+                                        <th>Total</th>
                                         <th>Paid</th>
                                         <th>Due</th>
                                     </tr>
                                     </thead>
                                     <tbody>
 
+                                        @foreach($sale->sellHistory as $key=>$sellHistoryData)
                                         <tr>
-                                            <td class="">1</td>
-
-                                                <td>1</td>
-                                                <td>2</td>
-                                                <td>3</td>
-                                                <td>4</td>
-
-                                            <td>5</td>
-                                            <td>6</td>
+                                            <td class="">{{$key+1}}</td>
+                                            <td>{{$sellHistoryData->sellProductions->production->product_design->product_name}}</td>
+                                            <td>{{$sellHistoryData->sellProductions->unit_price}}</td>
+                                            <td>{{$sellHistoryData->sellProductions->sell_qty}}</td>
+                                            <td>{{$sellHistoryData->sellProductions->sell_qty*$sellHistoryData->sellProductions->unit_price}}</td>
+                                            <td>{{$sellHistoryData->payment}}</td>
+                                            <td>{{$sellHistoryData->due}}</td>
                                         </tr>
+                                        @endforeach
 
 
                                     </tbody>

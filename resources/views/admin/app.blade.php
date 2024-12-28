@@ -99,10 +99,10 @@
         <a href="{{route('dashboard')}}" class="logo logo-light">
             @if (!empty($siteSetting->logo))
                 <span class="logo-lg">
-                    <img src="{{ $siteSetting->logo }}" alt="logo" style="height: 50px;">
+                    <img src="{{ asset($siteSetting->logo) }}" alt="logo" style="height: 50px;">
                 </span>
                 <span class="logo-sm">
-                    <img src="{{ $siteSetting->logo }}" alt="small logo">
+                    <img src="{{ asset($siteSetting->logo) }}" alt="small logo">
                 </span>
             @endif
         </a>
@@ -244,6 +244,30 @@
                 @endcan
 
 
+
+                @can('account-setting')
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarPages3011" aria-expanded="false"
+                           aria-controls="sidebarPages3011" class="side-nav-link">
+                            <i class="ri-account-box-line"></i>
+                            <span>Account</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarPages3011">
+                            <ul class="side-nav-second-level">
+                                @can('sale-history-list')
+                                    <li>
+                                        <a href="{{route('sale.history')}}"> Sell History</a>
+                                    </li>
+                                @endcan
+
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
+
+
+
                 @can('expense-manage')
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages301" aria-expanded="false"
@@ -269,15 +293,6 @@
                     </li>
                 @endcan
 
-                @can('sale-history-list')
-                    <li class="side-nav-item">
-                        <a href="{{route('sale.history')}}" class="side-nav-link">
-                            <i class="ri-shopping-cart-2-line"></i>
-                            <span> Sell History </span>
-                        </a>
-                    </li>
-
-                @endcan
 
 
                 @can('customer-section-list')
