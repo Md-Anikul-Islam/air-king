@@ -138,6 +138,9 @@ Route::middleware('auth')->group(callback: function () {
     Route::get('/production-delete/{id}', [ProductionController::class, 'destroy'])->name('production.destroy');
     Route::put('/change-status/{id}', [ProductionController::class, 'change_status'])->name('production.change_status');
 
+    //Production Sale
+    Route::get('/production-sale', [ProductionController::class, 'productionSale'])->name('production.sale');
+
     //Expense Types
     Route::get('/expense', [ExpenseController::class, 'index'])->name('expense');
     Route::post('/expense-store', [ExpenseController::class, 'store'])->name('expense.store');

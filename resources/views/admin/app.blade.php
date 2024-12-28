@@ -238,6 +238,13 @@
                                         <a href="{{route('production')}}">Production</a>
                                     </li>
                                 @endcan
+
+                                @can('production-should-out')
+                                    <li>
+                                        <a href="{{route('production.sale')}}"> Production Souled Out</a>
+                                    </li>
+                                @endcan
+
                             </ul>
                         </div>
                     </li>

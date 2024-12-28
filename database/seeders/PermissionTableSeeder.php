@@ -138,6 +138,7 @@ class PermissionTableSeeder extends Seeder
             //For sale
             'sale-history-list',
             'account-setting',
+            'production-should-out',
 
 
             //For Role and permission

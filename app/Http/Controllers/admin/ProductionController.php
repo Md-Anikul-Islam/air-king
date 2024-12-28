@@ -176,4 +176,12 @@ class ProductionController extends Controller
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
+
+
+
+    public function productionSale()
+    {
+        $productions = Production::where('available_qty', '=', 0)->latest()->get();
+        return view('admin.pages.production.productionSale', compact('productions'));
+    }
 }
