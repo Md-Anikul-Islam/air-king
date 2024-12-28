@@ -147,6 +147,7 @@ class PermissionTableSeeder extends Seeder
             'site-setting',
             //Dashboard
             'login-log-list',
+            'cart-list',
 
 
         ];
