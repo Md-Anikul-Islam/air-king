@@ -34,7 +34,7 @@
                         <th>Unit Price</th>
                         <th>Production Qty</th>
                         <th>Available Qty</th>
-                        <th>Production Status</th>
+                        <th>Total Price</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -50,7 +50,7 @@
                                 <td>{{ $data->unit_price }}</td>
                                 <td>{{ $data->production_qty }}</td>
                                 <td>{{ $data->available_qty }}</td>
-                                <td> {{ $data->production_status == 1 ? 'Production Process Done' : ($data->production_status == 2 ? 'Send To Warehouse' : 'Sales Initiated') }}</td>
+                                <td>{{ $data->production_qty*$data->unit_price }}</td>
                             </tr>
                         @endforeach
                     @endif
