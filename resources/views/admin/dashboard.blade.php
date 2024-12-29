@@ -69,7 +69,7 @@
                             <i class="ri-file-line widget-icon"></i>
                         </div>
                         <h6 class="text-uppercase mt-0" title="Customers">Total Sale</h6>
-                        <h2 class="my-2">{{$totalSaleAmount}}</h2>
+                        <h2 id="totalSaleAmount" class="my-2">{{$totalSaleAmount}}</h2>
                     </div>
                 </div>
             </div>
@@ -115,5 +115,14 @@
         </div>
         @endcan
 
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var totalSaleAmount = {{$totalSaleAmount}};
+                document.getElementById('totalSaleAmount').innerText = Intl.NumberFormat('en-US', {
+                    notation: "compact",
+                    maximumFractionDigits: 1
+                }).format(totalSaleAmount);
+            });
+        </script>
 
 @endsection
