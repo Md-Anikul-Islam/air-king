@@ -101,6 +101,7 @@
                                     @endcan
                                 </div>
                             </td>
+                        </tr>
                         <tr>
                             <td colspan="7"></td>
                             <td><h5>Total Price</h5></td>
@@ -273,7 +274,6 @@
                                 </div>
                             </div>
                         </div>
-                        </tr>
                     @endforeach
                     </tbody>
                 </table>

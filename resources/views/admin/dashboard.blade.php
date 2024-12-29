@@ -69,7 +69,7 @@
                             <i class="ri-file-line widget-icon"></i>
                         </div>
                         <h6 class="text-uppercase mt-0" title="Customers">Total Sale</h6>
-                        <h2 class="my-2">{{$totalSaleAmount}}</h2>
+                        <h2 id="totalSaleAmount" class="my-2"></h2>
                     </div>
                 </div>
             </div>
@@ -115,5 +115,25 @@
         </div>
         @endcan
 
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var totalSaleAmount = {{$totalSaleAmount}};
+                document.getElementById('totalSaleAmount').innerText = formatCompactNumber(totalSaleAmount);
+            });
+
+            function formatCompactNumber(number) {
+                if (number < 1000) {
+                    return number;
+                } else if (number >= 1000 && number < 1_000_000) {
+                    return (number / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+                } else if (number >= 1_000_000 && number < 1_000_000_000) {
+                    return (number / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M";
+                } else if (number >= 1_000_000_000 && number < 1_000_000_000_000) {
+                    return (number / 1_000_000_000).toFixed(1).replace(/\.0$/, "") + "B";
+                } else if (number >= 1_000_000_000_000 && number < 1_000_000_000_000_000) {
+                    return (number / 1_000_000_000_000).toFixed(1).replace(/\.0$/, "") + "T";
+                }
+            }
+        </script>
 
 @endsection
