@@ -28,15 +28,16 @@
             <div class="card-body">
                 <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100">
                     <thead>
-                    <tr>
-                        <th>S/N</th>
-                        <th>Batch</th>
-                        <th>Date</th>
-                        <th>Available</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Batch</th>
+                            <th>Date</th>
+                            <th>Available</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
                     </thead>
+
                     <tbody>
                     @foreach($batches as $key=>$data)
                         <tr>
