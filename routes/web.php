@@ -21,11 +21,7 @@ use App\Http\Controllers\admin\ExpenseController;
 use App\Http\Controllers\admin\ExpenseTypeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-<<<<<<< Updated upstream
-=======
-use App\Http\Controllers\admin\SellHistoryDetailsController;
 use App\Http\Controllers\admin\ProductRequestController;
->>>>>>> Stashed changes
 use Illuminate\Support\Facades\Route;
 
 /*
