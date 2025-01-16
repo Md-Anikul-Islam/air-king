@@ -10,10 +10,7 @@ class ProductRequestController extends Controller
 {
     public function index()
     {
-        // Fetch all product requests
         $productRequests = ProductRequest::all();
-
-        // Pass data to the view
         return view('admin.pages.product_request.index', compact('productRequests'));
     }
 }
