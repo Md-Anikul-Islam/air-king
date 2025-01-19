@@ -173,6 +173,8 @@ Route::middleware('auth')->group(callback: function () {
 
     //Production
     Route::get('/product-request', [ProductRequestController::class, 'index'])->name('product.request');
+    Route::get('/product-request/{id}', [ProductRequestController::class, 'destroy'])->name('productRequest.destroy');
+
 
 });
 

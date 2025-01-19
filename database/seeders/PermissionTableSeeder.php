@@ -28,6 +28,7 @@ class PermissionTableSeeder extends Seeder
 
             //Product Request
             'product-request-list',
+            'product-request-section-delete',
 
             //For Product Category
             'product-category-section-list',
