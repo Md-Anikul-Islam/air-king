@@ -26,6 +26,9 @@ class PermissionTableSeeder extends Seeder
             //Product Design
             'product-design-manage',
 
+            //Product Request
+            'product-request-list',
+
             //For Product Category
             'product-category-section-list',
             'product-category-section-create',

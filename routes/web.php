@@ -24,6 +24,7 @@ use App\Http\Controllers\admin\ExpenseTypeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\admin\SellHistoryDetailsController;
+use App\Http\Controllers\admin\ProductRequestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -168,6 +169,10 @@ Route::middleware('auth')->group(callback: function () {
     //Site Setting
     Route::get('/site-setting', [SiteSettingController::class, 'index'])->name('site.setting');
     Route::post('/site-settings-store-update/{id?}', [SiteSettingController::class, 'createOrUpdate'])->name('site-settings.createOrUpdate');
+
+
+    //Production
+    Route::get('/product-request', [ProductRequestController::class, 'index'])->name('product.request');
 
 });
 

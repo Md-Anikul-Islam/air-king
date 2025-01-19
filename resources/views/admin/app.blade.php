@@ -311,6 +311,15 @@
                     </li>
                 @endcan
 
+                @can('product-request-list')
+                    <li class="side-nav-item">
+                        <a href="{{route('product.request')}}" class="side-nav-link">
+                            <i class="ri-shopping-cart-line"></i>
+                            <span>Product Request </span>
+                        </a>
+                    </li>
+                @endcan
+
 
                 @can('site-setting')
                     <li class="side-nav-item">
